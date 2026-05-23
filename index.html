@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abidunnisa Begum — Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --green: #00C98D;
+      --green-dark: #008f63;
+      --muted: #a0a0a0;
+      --card-bg: #161616;
+      --border: #1f1f1f;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0a0a0a !important;
+      background-color: #0a0a0a !important;
+      color: #ffffff !important;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    html { background: #0a0a0a !important; }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--green);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, opacity 0.2s;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(0,201,141,0.4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 48px;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--green);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .hero-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 22vw, 320px);
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.05);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -4px;
+    }
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 8vw, 112px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+      color: #ffffff;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--green);
+    }
+    .hero-desc {
+      max-width: 520px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .hero-cta {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--black);
+      padding: 14px 32px;
+      border-radius: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #00e6a0; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 2px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--green); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute; right: 48px; bottom: 80px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+    .hero-scroll span {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+      writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--green), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    /* ABOUT STRIP */
+    .about-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex; gap: 48px; flex-wrap: wrap; align-items: center;
+    }
+    .stat { display: flex; flex-direction: column; gap: 4px; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--green);
+      line-height: 1;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .stat-divider { width: 1px; height: 48px; background: var(--border); }
+
+    /* SECTION */
+    section { padding: 100px 48px; }
+    .section-label {
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.1;
+      margin-bottom: 64px;
+      color: #ffffff;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+
+    /* PROJECTS */
+    .projects-grid { display: flex; flex-direction: column; gap: 2px; }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--green);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+      transform-origin: bottom;
+    }
+    .project-card:hover { border-color: rgba(0,201,141,0.3); background: #181818; }
+    .project-card:hover::before { transform: scaleY(1); }
+
+    .project-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 3px;
+      color: var(--muted); margin-bottom: 16px;
+    }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px; margin-bottom: 12px; color: #ffffff;
+    }
+    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 600px; }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .tag {
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 100px;
+      color: var(--muted);
+    }
+    .tag.green { border-color: var(--green); color: var(--green); }
+
+    .project-meta { text-align: right; }
+    .project-status {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px;
+      display: inline-block; margin-bottom: 16px;
+    }
+    .status-live { background: rgba(0,201,141,0.1); color: var(--green); border: 1px solid rgba(0,201,141,0.3); }
+    .status-progress { background: rgba(255,180,0,0.1); color: #ffb400; border: 1px solid rgba(255,180,0,0.3); }
+    .project-role { font-size: 12px; color: var(--muted); }
+
+    .project-arrow {
+      position: absolute; right: 48px; bottom: 40px;
+      font-size: 24px; color: var(--green);
+      opacity: 0; transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
+
+    /* SKILLS */
+    .skills-section { background: #0d0d0d; }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .skill-block {
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 2px;
+      transition: border-color 0.3s;
+    }
+    .skill-block:hover { border-color: rgba(0,201,141,0.4); }
+    .skill-icon { font-size: 28px; margin-bottom: 16px; }
+    .skill-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+    .skill-list { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+    /* CONTACT */
+    .contact-section {
+      text-align: center;
+      background: linear-gradient(to bottom, var(--black), #0d1a14);
+    }
+    .contact-email {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      color: var(--green);
+      text-decoration: none;
+      display: block;
+      margin: 32px 0;
+      transition: opacity 0.2s;
+    }
+    .contact-email:hover { opacity: 0.7; }
+    .contact-links { display: flex; justify-content: center; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
+    .contact-link {
+      font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--green); border-color: var(--green); }
+
+    /* EXPERIENCE */
+    .exp-item {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-role { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #ffffff; }
+    .exp-company { font-size: 13px; color: var(--green); margin-bottom: 8px; }
+    .exp-year { color: #a0a0a0; font-size: 12px; margin-left: 8px; }
+    .exp-desc { font-size: 13px; color: #a0a0a0; line-height: 1.7; }
+
+    @media (max-width: 768px) {
+      #experience > div { grid-template-columns: 1fr !important; }
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer p { font-size: 12px; color: var(--muted); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 24px 64px; }
+      section { padding: 72px 24px; }
+      .about-strip { padding: 24px; gap: 24px; }
+      .stat-divider { display: none; }
+      .project-card { padding: 28px 24px; grid-template-columns: 1fr; }
+      .project-meta { text-align: left; }
+      .project-arrow { right: 24px; }
+      footer { padding: 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">ABID</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text">PM</div>
+    <div class="hero-tag">Product Manager · Edtech Specialist · Hyderabad, India</div>
+    <h1 class="hero-name">
+      Building products<br>for people learning<br><em>something hard.</em>
+    </h1>
+    <p class="hero-desc">
+      6 years in a classroom teaching data. Now building the tools I always wished existed.
+      I bring domain expertise, user empathy, and product thinking — all from the same person.
+    </p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">See My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="about-strip reveal">
+    <div class="stat">
+      <span class="stat-number">6+</span>
+      <span class="stat-label">Years Training</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-number">5</span>
+      <span class="stat-label">Products Built</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-number">2</span>
+      <span class="stat-label">Brands Founded</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-number">∞</span>
+      <span class="stat-label">Students Impacted</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title reveal">Products I've <em>owned.</em></h2>
+    <div class="projects-grid">
+
+      <!-- SQLingo -->
+      <div class="project-card reveal" onclick="window.location='sqlingo-case-study.html'" style="cursor:pointer;">
+        <div>
+          <div class="project-number">01</div>
+          <div class="project-title">SQLingo</div>
+          <div class="project-desc">
+            Duolingo — but for SQL. A gamified, mobile-first learning app where users learn SQL through activities — match syntax, drag and drop, choose the right answer — with AI explaining every mistake. Built for the millions who want to learn SQL but can't afford live classes or sit through hours of video.
+          </div>
+          <div class="project-tags">
+            <span class="tag green">In Progress</span>
+            <span class="tag">Edtech</span>
+            <span class="tag">Consumer App</span>
+            <span class="tag">AI</span>
+            <span class="tag">Gamification</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-progress">In Progress</div>
+          <div class="project-role">Founder & PM</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+      <!-- SQL Roadmap -->
+      <div class="project-card reveal" onclick="window.open('https://abidunnisa.github.io/data-analytics-ebook/sql-roadmap.html','_blank')" style="cursor:pointer;">
+        <div>
+          <div class="project-number">06</div>
+          <div class="project-title">Interactive SQL Roadmap</div>
+          <div class="project-desc">
+            A free interactive SQL learning roadmap built as a standalone web tool — distributed via Instagram and LinkedIn to thousands of learners. Gives self-learners a clear, structured path through SQL without needing to buy a course or follow a scattered YouTube playlist.
+          </div>
+          <div class="project-tags">
+            <span class="tag green">Live</span>
+            <span class="tag">Free Tool</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Community</span>
+            <span class="tag">Dig Data</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-live">Live</div>
+          <div class="project-role">Creator & PM</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+      <!-- Data Analytics Ebook -->
+      <div class="project-card reveal" onclick="window.open('https://abidunnisa.github.io/data-analytics-ebook','_blank')" style="cursor:pointer;">
+        <div>
+          <div class="project-number">07</div>
+          <div class="project-title">From Zero to Data Analyst</div>
+          <div class="project-desc">
+            A free interactive data analytics e-textbook hosted on GitHub Pages. Includes curated learning paths, YouTube channel recommendations, and a built-in certificate generator. Designed for self-learners who can't afford structured courses — giving them a guided path with zero cost.
+          </div>
+          <div class="project-tags">
+            <span class="tag green">Live</span>
+            <span class="tag">Free Product</span>
+            <span class="tag">Interactive</span>
+            <span class="tag">Edtech</span>
+            <span class="tag">Dig Data</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-live">Live</div>
+          <div class="project-role">Creator & PM</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+      <!-- AI Chatbot -->
+      <div class="project-card reveal">
+        <div>
+          <div class="project-number">06</div>
+          <div class="project-title">AI Student Support Chatbot</div>
+          <div class="project-desc">
+            A fine-tuned AI chatbot built to handle student queries when the tech team was unavailable — trained on historical student-teacher email exchanges. Designed with strict guardrails: helpful for navigation and concept clarification, but never giving direct answers to assignments or quizzes. Built before RAG was mainstream.
+          </div>
+          <div class="project-tags">
+            <span class="tag">AI Product</span>
+            <span class="tag">Fine-tuning</span>
+            <span class="tag">Edtech</span>
+            <span class="tag">Guardrails</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-live">Launched</div>
+          <div class="project-role">Product Owner · QA Lead</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+      <!-- Coursekiya -->
+      <div class="project-card reveal">
+        <div>
+          <div class="project-number">07</div>
+          <div class="project-title">Coursekiya</div>
+          <div class="project-desc">
+            A paid data analytics training platform founded and run independently. Manages end-to-end student lifecycle — from acquisition to placement support. Built conversion funnels, batch structures, and curriculum from scratch with a focus on job-ready outcomes over content completion.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Platform</span>
+            <span class="tag">B2C</span>
+            <span class="tag">Edtech</span>
+            <span class="tag">Founder</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-live">Live</div>
+          <div class="project-role">Founder</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+      <!-- Ebook -->
+      <div class="project-card reveal">
+        <div>
+          <div class="project-number">06</div>
+          <div class="project-title">From Zero to Data Analyst</div>
+          <div class="project-desc">
+            A free interactive data analytics e-textbook hosted on GitHub Pages. Includes curated learning paths, YouTube channel recommendations, and a built-in certificate generator. Designed for self-learners who can't afford structured courses — giving them a guided path with zero cost.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Free Product</span>
+            <span class="tag">Interactive</span>
+            <span class="tag">Edtech</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-live">Live</div>
+          <div class="project-role">Creator & PM</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+      <!-- SQL Roadmap -->
+      <div class="project-card reveal">
+        <div>
+          <div class="project-number">07</div>
+          <div class="project-title">Interactive SQL Roadmap</div>
+          <div class="project-desc">
+            A free interactive SQL learning roadmap built as a standalone web tool and distributed via Instagram and LinkedIn. Gives learners a clear, structured path through SQL — from basics to advanced — without needing to buy a course or follow a scattered YouTube playlist.
+          </div>
+          <div class="project-tags">
+            <span class="tag">Free Tool</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Community</span>
+          </div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status status-live">Live</div>
+          <div class="project-role">Creator & PM</div>
+        </div>
+        <div class="project-arrow">→</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills-section">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-title reveal">What I bring<br>to the <em>table.</em></h2>
+    <div class="skills-grid">
+      <div class="skill-block reveal">
+        <div class="skill-icon">🧭</div>
+        <div class="skill-title">Product Strategy</div>
+        <div class="skill-list">PRD Writing · User Journeys · Feature Scoping · Roadmapping · BDD / Gherkin</div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-title">Data & Analytics</div>
+        <div class="skill-list">SQL · Python · Power BI · Tableau · DAX · EDA · Statistics</div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-title">AI Product</div>
+        <div class="skill-list">LLMs · RAG · Fine-tuning · Prompt Design · AI Guardrails · MCP</div>
+      </div>
+      <div class="skill-block reveal">
+        <div class="skill-icon">🎓</div>
+        <div class="skill-title">Domain: Edtech</div>
+        <div class="skill-list">Curriculum Design · Learner Psychology · Conversion Funnels · Student Outcomes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="section-label">Let's Talk</div>
+    <h2 class="section-title reveal">Open to <em>collaborations.</em></h2>
+    <p style="color: var(--muted); font-size: 16px; max-width: 480px; margin: 0 auto; line-height: 1.7;">
+      If you're building something in edtech, AI, or learning — and you need someone who thinks in products and speaks the learner's language — let's talk.
+    </p>
+    <a href="mailto:abidunnisabegum@yahoo.com" class="contact-email reveal">
+      abidunnisabegum@yahoo.com
+    </a>
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/abidunnisa-begum" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://instagram.com/digdata_by_abid" target="_blank" class="contact-link">Instagram</a>
+      <a href="https://abidunnisa.github.io/data-analytics-ebook" target="_blank" class="contact-link">Dig Data</a>
+      <a href="https://coursekiya.com" target="_blank" class="contact-link">Coursekiya</a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" style="background:#0a0a0a;">
+    <div class="section-label">Background</div>
+    <h2 class="section-title reveal">Where I've <em>been.</em></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;">
+      <div>
+        <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:32px;">Experience</p>
+        <div class="exp-item reveal">
+          <div class="exp-role">Assistant Product Manager</div>
+          <div class="exp-company">OdinSchool <span class="exp-year">Jun 2023 – Oct 2025</span></div>
+          <div class="exp-desc">Built Power BI and Tableau dashboards tracking enrollment, completion, and revenue. Wrote SQL for business reporting and collaborated with product and marketing teams on user engagement strategy.</div>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-role">Product Content Strategist</div>
+          <div class="exp-company">Quantumics.AI <span class="exp-year">Jul 2022 – Jun 2023</span></div>
+          <div class="exp-desc">Analyzed product usage and customer engagement. Conducted market and competitor research. Translated technical concepts into structured documentation and supported launch of AI-based tools.</div>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-role">Product Lead</div>
+          <div class="exp-company">GreyCampus <span class="exp-year">Nov 2020 – Jun 2022</span></div>
+          <div class="exp-desc">Evaluated learning platform data to understand student engagement and completion. Built internal dashboards and worked cross-functionally to support data-driven course design decisions.</div>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-role">Data Science Trainer</div>
+          <div class="exp-company">ExcelR · OdinSchool · FullStack Academy · Deloitte <span class="exp-year">2018 – Present</span></div>
+          <div class="exp-desc">6+ years training professionals and freshers in SQL, Python, Power BI, Tableau, and Machine Learning. This is where the real user research happened — live, in a classroom.</div>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-role">Data Analyst</div>
+          <div class="exp-company">Prajay Engineers <span class="exp-year">Apr 2017 – Nov 2020</span></div>
+          <div class="exp-desc">Analyzed real estate sales and customer demographics. Built Excel and SQL reports supporting management decisions and strategic planning.</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:32px;">Education & Certifications</p>
+        <div class="exp-item reveal">
+          <div class="exp-role">Product Management Certification</div>
+          <div class="exp-company">UpGrad × Duke University <span class="exp-year">Jun 2024 – Dec 2024</span></div>
+          <div class="exp-desc">Product Strategy · User Research · Roadmapping · Market Analysis · PRD Writing</div>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-role">Master of Pharmacy (M.Pharm)</div>
+          <div class="exp-company">JNTUH <span class="exp-year">2014 – 2017</span></div>
+          <div class="exp-desc">Research methodology, data interpretation, and structured problem solving — foundations that translate directly into product thinking.</div>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-role">Bachelor of Pharmacy (B.Pharm)</div>
+          <div class="exp-company">JNTUH <span class="exp-year">2010 – 2014</span></div>
+        </div>
+        <div style="margin-top:48px;">
+          <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:32px;">Founded</p>
+          <div class="exp-item reveal">
+            <div class="exp-role">Coursekiya</div>
+            <div class="exp-company">Paid Data Analytics Training Platform <span class="exp-year">2023 – Present</span></div>
+            <div class="exp-desc">coursekiya.com</div>
+          </div>
+          <div class="exp-item reveal">
+            <div class="exp-role">Dig Data</div>
+            <div class="exp-company">Free Educational Content Brand <span class="exp-year">2023 – Present</span></div>
+            <div class="exp-desc">@digdata_by_abid · Instagram & YouTube</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Abidunnisa Begum. Built with intention.</p>
+    <p style="color: var(--muted);">Hyderabad, India · +91 99854 62830</p>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+    document.querySelectorAll('a, button, .project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+        ring.style.width = '56px'; ring.style.height = '56px';
+        ring.style.borderColor = 'rgba(0,201,141,0.6)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.width = '36px'; ring.style.height = '36px';
+        ring.style.borderColor = 'rgba(0,201,141,0.4)';
+      });
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
