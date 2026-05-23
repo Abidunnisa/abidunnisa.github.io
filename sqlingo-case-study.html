@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SQLingo Case Study — Abidunnisa Begum</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --teal:#0D9488;--teal-light:#E1F5EE;--teal-dark:#085041;--teal-deep:#0F6E56;
+  --bg:#f7faf9;--surface:#ffffff;--border:#d1e8e2;
+  --text:#1a2e2a;--muted:#5a7a72;
+}
+html,body{background:#f7faf9 !important;color:#1a2e2a !important;font-family:'Nunito',sans-serif;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,0.95);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:var(--teal);text-decoration:none;}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color 0.2s;}
+.nav-back:hover{color:var(--teal);}
+
+/* HERO */
+.hero{padding:120px 24px 64px;max-width:800px;margin:0 auto;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--teal-light);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:700;color:var(--teal-deep);margin-bottom:24px;letter-spacing:0.5px;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(40px,7vw,72px);line-height:1.1;color:var(--text);margin-bottom:16px;letter-spacing:-1px;}
+.hero-title em{font-style:italic;color:var(--teal);}
+.hero-sub{font-size:18px;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:40px;}
+.hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
+.meta-item{}
+.meta-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px;}
+.meta-value{font-size:14px;font-weight:700;color:var(--text);}
+.hero-divider{height:1px;background:var(--border);margin:48px 0;}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:0 24px 64px;max-width:752px;margin-left:auto;margin-right:auto;}
+.stat-box{background:var(--surface);padding:24px 20px;text-align:center;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--teal);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600;}
+
+/* CONTENT */
+.content{max-width:800px;margin:0 auto;padding:0 24px 120px;}
+.section{margin-bottom:72px;opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.section.visible{opacity:1;transform:translateY(0);}
+.section-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:12px;}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:20px;line-height:1.2;}
+.section-title em{font-style:italic;color:var(--teal);}
+.body-text{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:16px;}
+.body-text strong{color:var(--text);font-weight:700;}
+
+/* QUOTE */
+.quote{border-left:3px solid var(--teal);padding:20px 24px;background:var(--teal-light);border-radius:0 12px 12px 0;margin:28px 0;}
+.quote-text{font-family:'DM Serif Display',serif;font-size:20px;color:var(--teal-dark);line-height:1.5;font-style:italic;}
+.quote-attr{font-size:13px;color:var(--teal-deep);margin-top:8px;font-weight:700;}
+
+/* DECISION CARDS */
+.decisions{display:flex;flex-direction:column;gap:16px;margin-top:24px;}
+.decision-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:24px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;}
+.decision-num{width:36px;height:36px;border-radius:50%;background:var(--teal-light);border:1.5px solid var(--teal);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--teal-deep);flex-shrink:0;}
+.decision-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.decision-body{font-size:14px;color:var(--muted);line-height:1.7;}
+.decision-body strong{color:var(--text);}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:24px;}
+.timeline-item{display:grid;grid-template-columns:120px 1fr;gap:24px;padding-bottom:32px;position:relative;}
+.timeline-item::before{content:'';position:absolute;left:108px;top:8px;bottom:0;width:1px;background:var(--border);}
+.timeline-item:last-child::before{display:none;}
+.timeline-date{font-size:12px;font-weight:700;color:var(--teal);text-align:right;padding-top:2px;}
+.timeline-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid var(--surface);position:absolute;left:104px;top:6px;}
+.timeline-content{}
+.timeline-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.timeline-desc{font-size:14px;color:var(--muted);line-height:1.6;}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.tag{background:var(--teal-light);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--teal-deep);}
+.tag.outline{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
+
+/* LINKS */
+.link-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:border-color 0.2s,background 0.2s;margin-top:16px;}
+.link-card:hover{border-color:var(--teal);background:var(--teal-light);}
+.link-card-label{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:2px;}
+.link-card-url{font-size:15px;font-weight:800;color:var(--teal);}
+.link-arrow{font-size:20px;color:var(--teal);}
+
+/* LEARNINGS */
+.learnings{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px;}
+.learning-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:20px;}
+.learning-icon{font-size:24px;margin-bottom:10px;}
+.learning-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.learning-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* NEXT */
+.next-section{background:var(--teal);border-radius:20px;padding:40px;text-align:center;margin-top:48px;}
+.next-title{font-family:'DM Serif Display',serif;font-size:32px;color:white;margin-bottom:8px;}
+.next-sub{font-size:15px;color:rgba(255,255,255,0.8);margin-bottom:24px;}
+.next-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.next-tag{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:100px;padding:6px 16px;font-size:13px;color:white;font-weight:600;}
+
+/* FOOTER NAV */
+.foot-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 24px;border-top:1px solid var(--border);max-width:800px;margin:0 auto;flex-wrap:wrap;gap:16px;}
+.foot-link{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color 0.2s;}
+.foot-link:hover{color:var(--teal);}
+
+@media(max-width:600px){
+  nav{padding:14px 16px;}
+  .hero{padding:100px 16px 48px;}
+  .stats-bar{margin:0 16px 48px;}
+  .content{padding:0 16px 80px;}
+  .timeline-item{grid-template-columns:80px 1fr;gap:16px;}
+  .timeline-item::before{left:75px;}
+  .timeline-dot{left:71px;}
+  .decision-card{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ABID</a>
+  <a href="index.html" class="nav-back">← Back to portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">📦 Case Study · Product Management</div>
+  <h1 class="hero-title">SQL<em>ingo</em></h1>
+  <p class="hero-sub">How I went from a student's WhatsApp message to a live, gamified SQL learning app — without a developer, without a budget, and without a single line of code I wrote myself.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Founder & Product Manager</div></div>
+    <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">May 2026 — Ongoing</div></div>
+    <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Live — Module 1 complete</div></div>
+    <div class="meta-item"><div class="meta-label">Stack</div><div class="meta-value">HTML · CSS · JS · Vercel</div></div>
+  </div>
+  <div class="hero-divider"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Lessons built</div></div>
+  <div class="stat-box"><div class="stat-num">25</div><div class="stat-lbl">Activities</div></div>
+  <div class="stat-box"><div class="stat-num">2</div><div class="stat-lbl">Environments</div></div>
+  <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Budget spent</div></div>
+  <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Ambition</div></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- THE MOMENT -->
+  <div class="section">
+    <div class="section-tag">01 — The Origin</div>
+    <h2 class="section-title">It started with one <em>WhatsApp message.</em></h2>
+    <p class="body-text">A student messaged me. A 2024 passout, BCA + MBA background, trying to break into data analytics. He had learned SQL completely — every concept — by writing it in a notebook by hand. No laptop. No compiler. No one to tell him if he was right or wrong.</p>
+    <div class="quote">
+      <div class="quote-text">"I learn SQL completely, concept I get but practical knowledge I don't have... I just write myself in note itself."</div>
+      <div class="quote-attr">— Student message, May 2026</div>
+    </div>
+    <p class="body-text">He wasn't the exception. He was everyone. People who want to learn SQL but have no time for long videos, can't self-evaluate, get stuck on Udemy with no one to answer, and can't justify ₹5,000–7,000 on live classes when they're not even sure SQL is for them.</p>
+    <p class="body-text"><strong>That message stayed with me. And SQLingo was born from it.</strong></p>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="section">
+    <div class="section-tag">02 — The Problem</div>
+    <h2 class="section-title">No feedback loop. <em>No progress.</em></h2>
+    <p class="body-text">The problem isn't access to SQL content — YouTube has thousands of SQL tutorials. The problem is that people consume content without ever practicing it. They finish a course and still don't know if they can actually think in SQL.</p>
+    <p class="body-text">Duolingo solved this exact problem for languages. You don't watch French videos — you speak French, get feedback instantly, and come back tomorrow. <strong>SQL is also a language. So why isn't there a Duolingo for SQL?</strong></p>
+    <div class="tags">
+      <span class="tag">No practice environment</span>
+      <span class="tag">No feedback loop</span>
+      <span class="tag">No affordable option</span>
+      <span class="tag">No self-evaluation</span>
+    </div>
+  </div>
+
+  <!-- THE USER -->
+  <div class="section">
+    <div class="section-tag">03 — The User</div>
+    <h2 class="section-title">Not just freshers. <em>Everyone.</em></h2>
+    <p class="body-text">SQLingo targets two equally important users — and this was a deliberate product decision.</p>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">The fresher</div>
+          <div class="decision-body">2024/2025 graduate building a data analytics resume. Learning SQL from YouTube, often without a laptop or structured practice. Needs to prove skill before getting the job.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">The working professional</div>
+          <div class="decision-body">Already employed, wants to pull their own data without depending on the tech team. Can't commit to a full course. Needs bite-sized, practical learning that fits into a busy schedule.</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:20px;">Both chose SQL for the same reason — <strong>it's the least intimidating technical skill.</strong> No complex syntax, no environment setup. You write a question, the database answers. SQL is the entry point into data for people who don't see themselves as coders.</p>
+  </div>
+
+  <!-- KEY DECISIONS -->
+  <div class="section">
+    <div class="section-tag">04 — Key Product Decisions</div>
+    <h2 class="section-title">Every choice had <em>a reason.</em></h2>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">No free-type SQL in lessons</div>
+          <div class="decision-body">The hardest technical problem in SQL learning apps is validating free-form queries — <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#E1F5EE;color:#0F6E56;padding:1px 6px;border-radius:4px;">SELECT * FROM users WHERE age > 25</code> and <code style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#E1F5EE;color:#0F6E56;padding:1px 6px;border-radius:4px;">SELECT * FROM users WHERE 25 < age</code> are both correct. Instead, users learn through select, match, drag, and fill activities. The app always knows the correct answer. No ambiguity, instant validation, zero complexity.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">Warm teal — not Duolingo green</div>
+          <div class="decision-body">Colour was chosen for three reasons — accessibility (safe for colour blindness and photosensitive users), education psychology (blue-teal family signals trust and focus), and acquisition neutrality (no major edtech brand owns this exact tone). Every colour decision was documented before a line of code was written.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">3</div>
+        <div>
+          <div class="decision-title">No mascot</div>
+          <div class="decision-body">Duolingo's owl drives retention through emotional guilt. But a mascot creates brand dependency — any acquiring company would inherit it. SQLingo uses a clean wordmark instead. Acquisition-friendly from day one.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">4</div>
+        <div>
+          <div class="decision-title">Freemium — free lessons, paid mock interviews</div>
+          <div class="decision-body">Free tier lowers the entry barrier completely — no credit card, no commitment. The natural upgrade trigger is job readiness — once someone finishes free lessons and feels confident, they want to prove it. That's when they pay for AI-powered SQL mock interviews. The student who couldn't afford ₹7,000 for live classes can now access real value for free, and upgrade when it matters.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">5</div>
+        <div>
+          <div class="decision-title">Mistake retry — Duolingo's core mechanic</div>
+          <div class="decision-body">If a user gets a question wrong, it's added to a queue. After all lesson questions are complete, only the wrong ones come back — one by one — until the user gets them right. This is overlearning. The concept has to become automatic, not just recognised.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">6</div>
+        <div>
+          <div class="decision-title">Sakila database — real, not invented</div>
+          <div class="decision-body">Every lesson uses Sakila — an open-source MySQL practice database (BSD license, free to use). Real database, real table names, real column names. Students learn SQL on actual data structures — not fictional examples that don't translate to the real world. The DVD rental store context also makes it human — before Netflix, this was how people watched movies.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILD PROCESS -->
+  <div class="section">
+    <div class="section-tag">05 — How It Was Built</div>
+    <h2 class="section-title">No developer. No budget. <em>Just process.</em></h2>
+    <p class="body-text">SQLingo was built entirely through a structured PM process — discovery, design decisions, content creation, and iterative testing. The technical build used AI-assisted development with zero developer dependency.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Day 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Discovery & Problem Definition</div>
+          <div class="timeline-desc">Student message → problem statement → user personas → competitor analysis. Documented before any design or build started.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Day 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Developer Questionnaire</div>
+          <div class="timeline-desc">Completed a full product discovery questionnaire — platform scope, gamification, learning content, AI features, monetisation, timeline, and budget. Every answer had reasoning behind it.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Day 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Design System Decisions</div>
+          <div class="timeline-desc">Colour (warm teal #0D9488), font (Nunito + JetBrains Mono), logo (clean wordmark), voice and tone — all decided with documented rationale before building.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Day 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Content Architecture</div>
+          <div class="timeline-desc">Lesson structure designed from 6 years of SQL training experience — 3 modules, 6 lessons per module, 8+ activities per lesson. Same concept taught from multiple angles until it's muscle memory.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Day 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Build, Test, Iterate</div>
+          <div class="timeline-desc">Module 1 built and tested. 6 observations collected during testing. All corrections applied — content rewritten, wrong question fixed, mistake retry logic rebuilt from scratch.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Day 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Deployed — Test & Production</div>
+          <div class="timeline-desc">Two separate environments set up on Vercel. Test environment for changes, production for users. Both live and working on day one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE LINKS -->
+  <div class="section">
+    <div class="section-tag">06 — Live Product</div>
+    <h2 class="section-title">It's <em>live.</em></h2>
+    <p class="body-text">Module 1 — SELECT & FROM — is live and working. 3 lessons, 25 activities, mistake retry, XP system, streak tracking. Free to use, no sign-up required.</p>
+    <a href="https://sqlingo-eta.vercel.app" target="_blank" class="link-card">
+      <div><div class="link-card-label">Production</div><div class="link-card-url">sqlingo-eta.vercel.app</div></div>
+      <div class="link-arrow">→</div>
+    </a>
+    <a href="https://sqlingo-dev.vercel.app" target="_blank" class="link-card">
+      <div><div class="link-card-label">Test environment</div><div class="link-card-url">sqlingo-dev.vercel.app</div></div>
+      <div class="link-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- LEARNINGS -->
+  <div class="section">
+    <div class="section-tag">07 — What I Learned</div>
+    <h2 class="section-title">The PM lessons <em>behind the product.</em></h2>
+    <div class="learnings">
+      <div class="learning-card">
+        <div class="learning-icon">🎯</div>
+        <div class="learning-title">User insight beats market research</div>
+        <div class="learning-body">The best product insight came from one WhatsApp message — not a survey or competitor analysis. Real users tell you everything.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-icon">⚙️</div>
+        <div class="learning-title">Solve the hardest technical problem first</div>
+        <div class="learning-body">Free-type SQL validation was the biggest technical risk. Solving it early — through structured activities — shaped the entire product architecture.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-icon">🎨</div>
+        <div class="learning-title">Design decisions need documentation</div>
+        <div class="learning-body">Every colour, font, and layout choice was documented with reasoning. This is what separates a PM portfolio from a developer portfolio.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-icon">🔁</div>
+        <div class="learning-title">Test with real users, not assumptions</div>
+        <div class="learning-body">6 corrections came from one round of testing. No amount of planning replaces actually using the product and observing what breaks.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-icon">💰</div>
+        <div class="learning-title">Budget is not the constraint</div>
+        <div class="learning-body">SQLingo was built with zero budget. Process, clarity, and domain expertise replaced money. A working product in one day.</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-icon">🚀</div>
+        <div class="learning-title">Launch before you're ready</div>
+        <div class="learning-body">Module 1 is live while Modules 2 and 3 are still being built. Real users on a real product beats a perfect product no one has seen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT'S NEXT -->
+  <div class="section">
+    <div class="next-section">
+      <div class="next-title">What's next for SQLingo</div>
+      <div class="next-sub">Module 1 is live. The roadmap is clear.</div>
+      <div class="next-tags">
+        <span class="next-tag">Module 2 — WHERE clause</span>
+        <span class="next-tag">Module 3 — JOINs</span>
+        <span class="next-tag">User login & leaderboard</span>
+        <span class="next-tag">AI mock interviews (paid)</span>
+        <span class="next-tag">Waitlist campaign</span>
+        <span class="next-tag">Duolingo pitch</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot-nav">
+  <a href="index.html" class="foot-link">← Back to all work</a>
+  <a href="https://sqlingo-eta.vercel.app" target="_blank" class="foot-link">Try SQLingo live →</a>
+</div>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'), i*60);
+  });
+}, {threshold:0.1});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
