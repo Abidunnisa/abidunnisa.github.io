@@ -306,6 +306,46 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
     </div>
   </div>
 
+  <!-- MODULE 2 UPDATE -->
+  <div class="section">
+    <div class="section-tag">05b — Module 2 Build</div>
+    <h2 class="section-title">WHERE & Operators — <em>what it took.</em></h2>
+    <p class="body-text">Module 2 was the first real test of the SQLingo content framework. 6 lessons, 48 activities, covering every type of SQL operator — comparison, arithmetic, logical, special, and NULL handling.</p>
+    <p class="body-text"><strong>The teaching anchor:</strong> WHERE was introduced using Amazon's filter system — something every user already understands. Single filter = one WHERE condition. Multiple filters = AND, OR. The mental model transferred instantly.</p>
+    <p class="body-text"><strong>What testing found:</strong> Real testing caught issues that no amount of planning would have — a mathematically ambiguous question where two options were both correct, a MySQL division result that contradicted the explanation, and a JavaScript syntax error from apostrophes inside drag-and-drop word banks breaking the entire activity.</p>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">Ambiguous arithmetic question</div>
+          <div class="decision-body">A question asked which query doubled the rental rate. Two options were correct — rental_rate * 2 and rental_rate + rental_rate. Fixed by replacing one option with rental_rate + 2, which adds 2 instead of doubling. One unambiguous correct answer.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">MySQL division behaviour</div>
+          <div class="decision-body">The question stated SELECT 10/3 returns 3 (integer division). A real MySQL test proved it returns 3.3333. The explanation and correct answer were both wrong. Fixed to reflect actual MySQL behaviour — an important distinction for learners.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">3</div>
+        <div>
+          <div class="decision-title">Drag activity syntax error</div>
+          <div class="decision-body">Drag-and-drop words containing SQL strings like rating = 'G' used apostrophes that broke the JavaScript when placed inside single-quoted JS strings. Fixed by converting those specific activities to multiple choice — same concept tested, no technical fragility.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">4</div>
+        <div>
+          <div class="decision-title">Technically correct wrong answer</div>
+          <div class="decision-body">An IN operator question had option 1 as WHERE rating = 'G' OR rating = 'PG' OR rating = 'PG-13' — valid SQL, just verbose. Students could reasonably choose it. Fixed by replacing it with WHERE rating = 'G', 'PG', 'PG-13' — which looks plausible but is invalid SQL syntax.</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:20px;"><strong>The PM lesson:</strong> Content quality in a learning app is not just about accuracy — it is about unambiguity. Every question must have exactly one defensible correct answer. Testing with a real user (the trainer herself) caught all four issues before a single student saw them.</p>
+  </div>
+
   <!-- LIVE LINKS -->
   <div class="section">
     <div class="section-tag">06 — Live Product</div>
@@ -363,13 +403,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
   <div class="section">
     <div class="next-section">
       <div class="next-title">What's next for SQLingo</div>
-      <div class="next-sub">Module 1 is live. The roadmap is clear.</div>
+      <div class="next-sub">Modules 1 &amp; 2 are live. 13 more to go.</div>
       <div class="next-tags">
-        <span class="next-tag">Module 2 — WHERE clause</span>
-        <span class="next-tag">Module 3 — JOINs</span>
-        <span class="next-tag">User login & leaderboard</span>
+        <span class="next-tag">✓ Module 1 — SELECT &amp; FROM</span>
+        <span class="next-tag">✓ Module 2 — WHERE &amp; Operators</span>
+        <span class="next-tag">Module 3 — ORDER BY &amp; LIMIT</span>
+        <span class="next-tag">Module 4 — Aggregate Functions</span>
+        <span class="next-tag">Module 9 — JOINs</span>
+        <span class="next-tag">User login &amp; leaderboard</span>
         <span class="next-tag">AI mock interviews (paid)</span>
-        <span class="next-tag">Waitlist campaign</span>
         <span class="next-tag">Duolingo pitch</span>
       </div>
     </div>
