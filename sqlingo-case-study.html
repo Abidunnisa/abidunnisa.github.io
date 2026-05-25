@@ -130,7 +130,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
   <div class="hero-meta">
     <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Founder & Product Manager</div></div>
     <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">May 2026 — Ongoing</div></div>
-    <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Live — Modules 1 &amp; 2 complete</div></div>
+    <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Live — Modules 1, 2 &amp; 3 complete</div></div>
     <div class="meta-item"><div class="meta-label">Stack</div><div class="meta-value">HTML · CSS · JS · Vercel</div></div>
   </div>
   <div class="hero-divider"></div>
@@ -143,6 +143,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
   <div class="stat-box"><div class="stat-num">2</div><div class="stat-lbl">Environments</div></div>
   <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Budget spent</div></div>
   <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">Ambition</div></div>
+</div>
+
+<!-- TECH STACK -->
+<div style="max-width:800px;margin:0 auto 48px;padding:0 24px;">
+  <div style="background:#ffffff;border:1.5px solid #d1e8e2;border-radius:20px;padding:28px;">
+    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#0D9488;font-weight:700;margin-bottom:16px;">Built with</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <div style="background:#f0f7f5;border:1px solid #d1e8e2;border-radius:10px;padding:12px 16px;">
+        <div style="font-size:14px;font-weight:800;color:#1a2e2a;margin-bottom:2px;">HTML + CSS + JS</div>
+        <div style="font-size:12px;color:#5a7a72;">Single file. No framework.</div>
+      </div>
+      <div style="background:#f0f7f5;border:1px solid #d1e8e2;border-radius:10px;padding:12px 16px;">
+        <div style="font-size:14px;font-weight:800;color:#1a2e2a;margin-bottom:2px;">GitHub + Vercel</div>
+        <div style="font-size:12px;color:#5a7a72;">Version control + auto-deploy.</div>
+      </div>
+      <div style="background:#f0f7f5;border:1px solid #d1e8e2;border-radius:10px;padding:12px 16px;">
+        <div style="font-size:14px;font-weight:800;color:#1a2e2a;margin-bottom:2px;">localStorage</div>
+        <div style="font-size:12px;color:#5a7a72;">Progress saving. No backend yet.</div>
+      </div>
+      <div style="background:#f0f7f5;border:1px solid #d1e8e2;border-radius:10px;padding:12px 16px;">
+        <div style="font-size:14px;font-weight:800;color:#1a2e2a;margin-bottom:2px;">Nunito + JetBrains Mono</div>
+        <div style="font-size:12px;color:#5a7a72;">Accessibility-first font choices.</div>
+      </div>
+      <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:12px 16px;">
+        <div style="font-size:14px;font-weight:800;color:#856404;margin-bottom:2px;">Budget: ₹0</div>
+        <div style="font-size:12px;color:#856404;">Everything free.</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- CONTENT -->
@@ -346,11 +375,73 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
     <p class="body-text" style="margin-top:20px;"><strong>The PM lesson:</strong> Content quality in a learning app is not just about accuracy — it is about unambiguity. Every question must have exactly one defensible correct answer. Testing with a real user (the trainer herself) caught all four issues before a single student saw them.</p>
   </div>
 
+  <!-- TECH STACK -->
+  <div class="section">
+    <div class="section-tag">06b — Technical Architecture</div>
+    <h2 class="section-title">What it is <em>actually built with.</em></h2>
+    <p class="body-text">SQLingo is a single HTML file. No framework. No backend. No database. Everything — HTML structure, CSS styling, and JavaScript logic — lives in one file deployed on GitHub Pages and Vercel.</p>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">HTML + CSS + JavaScript</div>
+          <div class="decision-body">The entire app — all lessons, all activities, all gamification logic, mistake retry queue, XP tracking — is written in vanilla HTML, CSS, and JavaScript. No React, no Node, no build tools. One file that runs in any browser.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">GitHub + Vercel</div>
+          <div class="decision-body">GitHub stores the code. Vercel hosts it live. Every time a file is uploaded to GitHub, Vercel automatically rebuilds and redeploys — no manual steps. Two environments (dev and production) connected to two separate GitHub repositories.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">3</div>
+        <div>
+          <div class="decision-title">localStorage for progress</div>
+          <div class="decision-body">XP, streak, and lesson completion are saved using the browser's localStorage. This means progress persists across page refreshes on the same device and browser — but does not sync across devices or sessions on different browsers.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">4</div>
+        <div>
+          <div class="decision-title">Google Fonts</div>
+          <div class="decision-body">Nunito for all UI text — chosen for accessibility (rounded letterforms, dyslexia-friendly). JetBrains Mono for all SQL code — built specifically for code readability. Both loaded from Google Fonts CDN, free.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 3 UPDATE -->
+  <div class="section">
+    <div class="section-tag">05c — Module 3 Build</div>
+    <h2 class="section-title">ORDER BY & LIMIT — <em>sort and control.</em></h2>
+    <p class="body-text">Module 3 covered sorting and limiting results. 4 lessons, 32 activities. Simpler than Module 2 conceptually — but testing still caught two issues before a single student saw them.</p>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">Identical options in a multiple choice question</div>
+          <div class="decision-body">A question asking for the 10 shortest films had two options that were functionally identical — ORDER BY length and ORDER BY length ASC are the same thing since ASC is the default. Fixed by replacing one with ORDER BY length DESC — which gives the longest films, making it a clearly wrong answer.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">Function used before it was taught</div>
+          <div class="decision-body">A question used LENGTH() — a string function — inside an ORDER BY clause. LENGTH() is not taught until Module 6. Using it in Module 3 assumes knowledge students do not have yet. Replaced with a question using only concepts from Modules 1 to 3.</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:20px;"><strong>The PM lesson:</strong> Content sequencing is a product decision. Every concept used in a question must have been taught before that question appears. Curriculum mapping is not just about what to teach — it is about what order to teach it in.</p>
+  </div>
+
   <!-- LIVE LINKS -->
   <div class="section">
     <div class="section-tag">06 — Live Product</div>
     <h2 class="section-title">It's <em>live.</em></h2>
-    <p class="body-text">Module 1 — SELECT & FROM — is live and working. 3 lessons, 25 activities, mistake retry, XP system, streak tracking. Free to use, no sign-up required.</p>
+    <p class="body-text">Modules 1, 2, and 3 are live and working — 13 lessons, 105 activities, mistake retry, XP system, streak tracking. Free to use, no sign-up required.</p>
+    <p class="body-text"><strong>Current limitations:</strong> SQLingo is currently a single-file frontend with no backend or database. Progress is saved in the browser's localStorage — it persists on the same device but does not sync across devices or browsers. User login, leaderboards, and cross-device progress are not yet built. Phase 1 backend work — connecting a database and user authentication — is the identified next milestone.</p>
     <a href="https://sqlingo-eta.vercel.app" target="_blank" class="link-card">
       <div><div class="link-card-label">Production</div><div class="link-card-url">sqlingo-eta.vercel.app</div></div>
       <div class="link-arrow">→</div>
@@ -403,11 +494,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
   <div class="section">
     <div class="next-section">
       <div class="next-title">What's next for SQLingo</div>
-      <div class="next-sub">Modules 1 &amp; 2 are live. 13 more to go.</div>
+      <div class="next-sub">Modules 1, 2 &amp; 3 are live. 12 more to go.</div>
       <div class="next-tags">
         <span class="next-tag">✓ Module 1 — SELECT &amp; FROM</span>
         <span class="next-tag">✓ Module 2 — WHERE &amp; Operators</span>
-        <span class="next-tag">Module 3 — ORDER BY &amp; LIMIT</span>
+        <span class="next-tag">✓ Module 3 — ORDER BY &amp; LIMIT</span>
         <span class="next-tag">Module 4 — Aggregate Functions</span>
         <span class="next-tag">Module 9 — JOINs</span>
         <span class="next-tag">User login &amp; leaderboard</span>
