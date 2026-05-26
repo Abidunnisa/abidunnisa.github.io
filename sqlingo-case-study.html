@@ -436,6 +436,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
     <p class="body-text" style="margin-top:20px;"><strong>The PM lesson:</strong> Content sequencing is a product decision. Every concept used in a question must have been taught before that question appears. Curriculum mapping is not just about what to teach — it is about what order to teach it in.</p>
   </div>
 
+  <!-- LATEST UPDATES -->
+  <div class="section">
+    <div class="section-tag">05d — Latest Updates</div>
+    <h2 class="section-title">What shipped <em>this week.</em></h2>
+    <p class="body-text">Four updates shipped based on real testing — one from a bug found internally, two from product decisions, and one from direct user feedback from a complete SQL beginner.</p>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">Bug fix — multiple correct answers in fill questions</div>
+          <div class="decision-body">A fill-in-the-blank question asked for the not-equal operator. The answer was set to != only — but SQL also accepts <> for the same thing. A real user typed <> and got marked wrong. Fixed by updating the answer validation logic to accept an array of correct answers. Now any fill question can have multiple valid answers.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">Module test — 20 questions, no hints, 80% pass mark</div>
+          <div class="decision-body">After completing all lessons in a module, a test button unlocks. 20 random questions drawn from across all lessons. No hints, no feedback during the test, one chance per question. Pass at 80% to earn a bonus 100 XP and mark the module complete. Fail — wrong answers are shown and the test can be retaken with a reshuffled question set. Same philosophy as Duolingo — completion is not enough, you have to prove it.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">3</div>
+        <div>
+          <div class="decision-title">ⓘ Info button — quick reference on every activity</div>
+          <div class="decision-body">A small info button on every activity card opens a quick reference panel — the key syntax for that lesson, not the answer to the question. Requested by a real user who found BETWEEN, LIKE, and the % wildcard tricky without a reference. The panel shows only the template — enough to jog memory without giving anything away.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">4</div>
+        <div>
+          <div class="decision-title">First external user feedback</div>
+          <div class="decision-body">A complete SQL beginner tested the app and provided three pieces of feedback — BETWEEN and LIKE feel tricky and need more practice questions, the % wildcard needed a reference option, and the <> operator being rejected as wrong was confusing. All three were actioned. Real user feedback in day 3 of building — before a single line of marketing.</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:20px;"><strong>The PM lesson:</strong> The best product decisions come from watching real users struggle — not from assumptions. Every one of these updates came from someone actually using the product, not from a planning session.</p>
+  </div>
+
   <!-- LIVE LINKS -->
   <div class="section">
     <div class="section-tag">06 — Live Product</div>
@@ -494,7 +532,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,250,249,
   <div class="section">
     <div class="next-section">
       <div class="next-title">What's next for SQLingo</div>
-      <div class="next-sub">Modules 1, 2 &amp; 3 are live. 12 more to go.</div>
+      <div class="next-sub">Modules 1, 2 &amp; 3 live. Module tests, ⓘ hints &amp; bug fixes shipped.</div>
       <div class="next-tags">
         <span class="next-tag">✓ Module 1 — SELECT &amp; FROM</span>
         <span class="next-tag">✓ Module 2 — WHERE &amp; Operators</span>
