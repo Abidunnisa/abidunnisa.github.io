@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SQL Exam Prep — 24hr Crash Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --surface2: #1c1c28;
+  --border: #2a2a3a;
+  --text: #e8e8f0;
+  --muted: #6b6b85;
+  --accent: #ff6b6b;
+  --accent2: #4ecdc4;
+  --accent3: #ffe66d;
+  --accent4: #a29bfe;
+  --green: #00d2a0;
+  --red: #ff4757;
+  --code-bg: #0d0d16;
+  --radius: 14px;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { height:100%; overflow:hidden; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* SCREEN SYSTEM */
+.screen { display:none; flex-direction:column; height:100vh; overflow:hidden; }
+.screen.active { display:flex; }
+
+/* ═══════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════ */
+#home {
+  background: var(--bg);
+  justify-content: space-between;
+  padding: 0;
+  overflow-y: auto;
+}
+.home-hero {
+  background: linear-gradient(160deg, #1a0a2e 0%, #0a1628 50%, #0a2818 100%);
+  padding: 50px 28px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(78,205,196,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(162,155,254,0.1) 0%, transparent 50%);
+}
+.home-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background: rgba(255,107,107,0.15);
+  border: 1px solid rgba(255,107,107,0.3);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  position: relative;
+}
+.pulse { width:7px; height:7px; background:var(--accent); border-radius:50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+.home-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.05;
+  position: relative;
+  margin-bottom: 12px;
+}
+.home-title .highlight { color: var(--accent2); }
+.home-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  position: relative;
+  margin-bottom: 28px;
+}
+.progress-bar-wrap {
+  background: var(--border);
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 6px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent4));
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+.progress-label {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.home-topics {
+  padding: 20px 20px 100px;
+}
+.home-topics-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.topic-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.topic-card:active { transform: scale(0.98); }
+.topic-card.done { border-color: var(--green); }
+.topic-card.done::after {
+  content:'✓';
+  position:absolute; right:16px; top:50%; transform:translateY(-50%);
+  color: var(--green); font-size:18px; font-weight:700;
+}
+.topic-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.topic-info { flex:1; min-width:0; }
+.topic-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.topic-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.topic-progress {
+  display: flex; gap: 3px; margin-top: 6px;
+}
+.topic-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--border);
+  transition: background 0.3s;
+}
+.topic-dot.filled { background: var(--accent2); }
+
+/* ═══════════════════════════════════
+   LESSON SCREEN
+═══════════════════════════════════ */
+#lesson {
+  background: var(--bg);
+}
+.lesson-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.back-btn {
+  width:36px; height:36px;
+  background: var(--surface2);
+  border-radius: 10px;
+  display: flex; align-items:center; justify-content:center;
+  cursor: pointer;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.lesson-header-info { flex:1; min-width:0; }
+.lesson-topic-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-step-count { font-size: 11px; color: var(--muted); margin-top:1px; }
+.lesson-progress {
+  background: var(--border);
+  height: 3px;
+  flex-shrink: 0;
+}
+.lesson-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent4));
+  transition: width 0.4s ease;
+}
+.lesson-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px 20px;
+}
+.lesson-step { display:none; }
+.lesson-step.active { display:block; }
+
+.step-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+.badge-learn { background: rgba(78,205,196,0.15); color: var(--accent2); }
+.badge-quiz { background: rgba(255,230,109,0.15); color: var(--accent3); }
+.badge-practice { background: rgba(162,155,254,0.15); color: var(--accent4); }
+
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.step-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #c8c8d8;
+  margin-bottom: 16px;
+}
+.step-body strong { color: var(--text); font-weight: 600; }
+.step-body em { color: var(--accent3); font-style: normal; font-weight: 500; }
+
+.sql-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+  position: relative;
+}
+.sql-block .kw { color: #89b4fa; font-weight: 500; }
+.sql-block .val { color: #a6e3a1; }
+.sql-block .cmt { color: #45475a; font-style: italic; }
+.sql-block .fn { color: #cba6f7; }
+.sql-block .op { color: #fab387; }
+
+.analogy-box {
+  background: linear-gradient(135deg, rgba(255,230,109,0.06) 0%, rgba(255,230,109,0.02) 100%);
+  border: 1px solid rgba(255,230,109,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #e8e0b0;
+}
+.analogy-box .label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent3);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.warning-box {
+  background: rgba(255,71,87,0.08);
+  border: 1px solid rgba(255,71,87,0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: #ffb3b8;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+.info-cell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+.info-cell .cell-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.info-cell .cell-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--accent2);
+  font-weight: 500;
+}
+.info-cell .cell-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+/* QUIZ */
+.quiz-question {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.quiz-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-option {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: all 0.2s;
+  color: var(--text);
+}
+.quiz-option:active { transform: scale(0.98); }
+.quiz-option.correct { border-color: var(--green); background: rgba(0,210,160,0.08); color: var(--green); }
+.quiz-option.wrong { border-color: var(--red); background: rgba(255,71,87,0.08); color: var(--red); }
+.quiz-option.disabled { pointer-events: none; opacity: 0.5; }
+.quiz-option.disabled.correct { opacity: 1; }
+
+.quiz-feedback {
+  display: none;
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct-fb { background: rgba(0,210,160,0.08); border: 1px solid rgba(0,210,160,0.25); color: #80ffe8; }
+.quiz-feedback.wrong-fb { background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.25); color: #ffb3b8; }
+
+/* TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.data-table th {
+  background: var(--surface2);
+  color: var(--accent2);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 500;
+}
+.data-table td {
+  background: var(--surface);
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  color: var(--text);
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* NAVIGATION */
+.lesson-nav {
+  padding: 16px 20px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.nav-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: linear-gradient(135deg, var(--accent2), var(--accent4));
+  color: #0a0a0f;
+  letter-spacing: 0.3px;
+}
+.nav-btn:active { transform: scale(0.97); }
+.nav-btn:disabled { opacity: 0.4; pointer-events: none; }
+.nav-btn.secondary {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+
+/* COMPLETE SCREEN */
+#complete {
+  justify-content: center;
+  align-items: center;
+  padding: 40px 28px;
+  text-align: center;
+  background: radial-gradient(ellipse at center, #0d1f2d 0%, var(--bg) 70%);
+}
+.complete-emoji { font-size: 64px; margin-bottom: 20px; animation: bounce 1s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.complete-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+.complete-sub { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 32px; }
+.score-badge {
+  background: linear-gradient(135deg, rgba(78,205,196,0.15), rgba(162,155,254,0.15));
+  border: 1px solid rgba(78,205,196,0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 28px;
+  font-family: 'Syne', sans-serif;
+}
+.score-number { font-size: 48px; font-weight: 800; color: var(--accent2); }
+.score-label { font-size: 13px; color: var(--muted); }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 100;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.wildcard-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; }
+.wc-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 12px; }
+.wc-symbol { font-family:'DM Mono',monospace; font-size:22px; font-weight:700; color:var(--accent3); }
+.wc-meaning { font-size:11px; color:var(--muted); margin-top:2px; }
+.wc-example { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent2); margin-top:5px; }
+
+.join-visual { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px; margin:12px 0; }
+.join-circles { display:flex; justify-content:center; align-items:center; gap:0; margin-bottom:8px; }
+.circle-a, .circle-b { width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+.circle-a { background:rgba(255,107,107,0.2); border:2px solid var(--accent); color:var(--accent); margin-right:-15px; z-index:1; }
+.circle-b { background:rgba(78,205,196,0.2); border:2px solid var(--accent2); color:var(--accent2); margin-left:-15px; }
+.join-label { text-align:center; font-family:'Syne',sans-serif; font-size:13px; font-weight:700; }
+.join-desc { text-align:center; font-size:11px; color:var(--muted); margin-top:3px; }
+
+.agg-row { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--border); }
+.agg-row:last-child { border-bottom:none; }
+.agg-fn { font-family:'DM Mono',monospace; font-size:13px; color:var(--accent4); font-weight:500; min-width:80px; }
+.agg-desc { font-size:12px; color:var(--muted); }
+
+.compare-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+.compare-cell { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:10px; font-size:12px; }
+.compare-cell .ch { font-weight:700; font-family:'Syne',sans-serif; font-size:13px; margin-bottom:4px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════ HOME ═══════ -->
+<div id="home" class="screen active">
+  <div class="home-hero">
+    <div class="home-badge"><span class="pulse"></span> Exam in 24hrs</div>
+    <div class="home-title">SQL Crash<br><span class="highlight">Course</span></div>
+    <div class="home-subtitle">8 topics. Zero to exam-ready.<br>30–40 min total. Start anywhere.</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="overallProgress" style="width:0%"></div>
+    </div>
+    <div class="progress-label">
+      <span id="progressText">0 of 8 topics done</span>
+      <span id="progressPct">0%</span>
+    </div>
+  </div>
+  <div class="home-topics">
+    <div class="home-topics-title">Topics</div>
+    <div id="topicList"></div>
+  </div>
+</div>
+
+<!-- ═══════ LESSON ═══════ -->
+<div id="lesson" class="screen">
+  <div class="lesson-header">
+    <div class="back-btn" onclick="goHome()">←</div>
+    <div class="lesson-header-info">
+      <div class="lesson-topic-name" id="lessonTitle"></div>
+      <div class="lesson-step-count" id="lessonStepCount"></div>
+    </div>
+  </div>
+  <div class="lesson-progress"><div class="lesson-progress-fill" id="lessonProgressFill" style="width:0%"></div></div>
+  <div class="lesson-body" id="lessonBody"></div>
+  <div class="lesson-nav">
+    <button class="nav-btn" id="nextBtn" onclick="nextStep()">Continue →</button>
+  </div>
+</div>
+
+<!-- ═══════ COMPLETE ═══════ -->
+<div id="complete" class="screen">
+  <div class="complete-emoji">🎉</div>
+  <div class="complete-title">Topic Done!</div>
+  <div class="complete-sub" id="completeMsg">You've finished this topic.<br>Quiz score below.</div>
+  <div class="score-badge">
+    <div class="score-number" id="scoreNum">0/0</div>
+    <div class="score-label">Quiz Score</div>
+  </div>
+  <button class="nav-btn" onclick="goHome()" style="margin-bottom:12px">← Back to Topics</button>
+  <button class="nav-btn secondary" id="nextTopicBtn" onclick="goNextTopic()">Next Topic →</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════
+const topics = [
+  {
+    id: 0,
+    name: "SELECT Basics",
+    icon: "🔍",
+    color: "#ff6b6b",
+    bg: "rgba(255,107,107,0.15)",
+    desc: "SELECT, DISTINCT, calculated fields, AS",
+    steps: [
+      {
+        type: "learn",
+        title: "Think of it like Excel",
+        content: `Before any SQL, get this picture in your head.<br><br>
+Your college has a <strong>student database</strong>. Thousands of rows. You want to see only the students who scored above 75 in Maths, sorted by name.<br><br>
+You type a request. Out comes exactly what you asked for.<br><br>
+<em>That request — that's SQL.</em>`,
+        analogy: "A database table = an Excel sheet with rows and columns. SQL = you telling Excel exactly what to show you.",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "The SELECT Statement",
+        content: `SELECT is the most important SQL command. Every query starts with it.<br><br>
+<strong>The order never changes:</strong>`,
+        sql: `<span class="kw">SELECT</span>   what columns you want
+<span class="kw">FROM</span>     which table
+<span class="kw">WHERE</span>    filter rows       <span class="cmt">-- optional</span>
+<span class="kw">GROUP BY</span> group rows        <span class="cmt">-- optional</span>
+<span class="kw">HAVING</span>   filter groups     <span class="cmt">-- optional</span>
+<span class="kw">ORDER BY</span> sort the output   <span class="cmt">-- optional</span>`,
+        content2: `Only <strong>SELECT</strong> and <strong>FROM</strong> are mandatory. The rest are optional.<br><br>
+We use the <strong>DreamHome</strong> database — a property rental company. Main table: <strong>Staff</strong>.`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Your First 4 Queries",
+        content: `<strong>1. Get everything:</strong>`,
+        sql: `<span class="kw">SELECT</span> * <span class="kw">FROM</span> Staff;
+<span class="cmt">-- * means ALL columns</span>`,
+        content2: `<strong>2. Get specific columns:</strong>`,
+        sql2: `<span class="kw">SELECT</span> staffNo, fName, salary
+<span class="kw">FROM</span> Staff;`,
+        content3: `<strong>3. Remove duplicates with DISTINCT:</strong>`,
+        sql3: `<span class="kw">SELECT DISTINCT</span> city <span class="kw">FROM</span> Branch;
+<span class="cmt">-- no repeated cities</span>`,
+        content4: `<strong>4. Calculated field + rename with AS:</strong>`,
+        sql4: `<span class="kw">SELECT</span> staffNo, salary/<span class="val">12</span> <span class="kw">AS</span> monthlySalary
+<span class="kw">FROM</span> Staff;
+<span class="cmt">-- divide salary by 12, name it monthlySalary</span>`,
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "Which query shows all columns and all rows from the Staff table?",
+        options: [
+          "SELECT Staff;",
+          "SELECT * FROM Staff;",
+          "SELECT ALL Staff;",
+          "FROM Staff SELECT *;"
+        ],
+        correct: 1,
+        feedback: "✓ Correct! SELECT * gets all columns. FROM Staff tells it which table. The order SELECT → FROM never changes."
+      },
+      {
+        type: "quiz",
+        question: "You want to show monthly salary (salary divided by 12) with a proper column name. Which is correct?",
+        options: [
+          "SELECT salary / 12 FROM Staff;",
+          "SELECT salary AS monthlySalary / 12 FROM Staff;",
+          "SELECT salary/12 AS monthlySalary FROM Staff;",
+          "SELECT monthlySalary = salary/12 FROM Staff;"
+        ],
+        correct: 2,
+        feedback: "✓ The AS keyword renames the output column. Expression comes first (salary/12), then AS, then the new name."
+      },
+      {
+        type: "quiz",
+        question: "The Viewing table has 5 rows but some properties appear more than once. Which query removes duplicates?",
+        options: [
+          "SELECT propertyNo FROM Viewing;",
+          "SELECT UNIQUE propertyNo FROM Viewing;",
+          "SELECT DISTINCT propertyNo FROM Viewing;",
+          "SELECT propertyNo NODUPS FROM Viewing;"
+        ],
+        correct: 2,
+        feedback: "✓ DISTINCT is the keyword. Only DISTINCT — not UNIQUE, not NODUPS."
+      }
+    ]
+  },
+  {
+    id: 1,
+    name: "WHERE Clause",
+    icon: "🔎",
+    color: "#4ecdc4",
+    bg: "rgba(78,205,196,0.15)",
+    desc: "Comparison, BETWEEN, IN, LIKE, IS NULL",
+    steps: [
+      {
+        type: "learn",
+        title: "Filtering Rows with WHERE",
+        content: `WHERE decides <strong>which rows</strong> you get back. Without WHERE, you get every row in the table.<br><br>
+There are <strong>5 types</strong> of WHERE conditions. All 5 come in exams.`,
+        analogy: "WHERE is like the filter in Excel — it hides the rows you don't need.",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Type 1 & 2: Comparison + BETWEEN",
+        content: `<strong>Comparison — uses operators:</strong> = &nbsp; &lt;&gt; &nbsp; &lt; &nbsp; &gt; &nbsp; &lt;= &nbsp; >=`,
+        sql: `<span class="kw">SELECT</span> staffNo, fName, salary
+<span class="kw">FROM</span> Staff
+<span class="kw">WHERE</span> salary <span class="op">></span> <span class="val">10000</span>;
+
+<span class="cmt">-- AND / OR for multiple conditions:</span>
+<span class="kw">WHERE</span> city <span class="op">=</span> <span class="val">'London'</span> <span class="kw">OR</span> city <span class="op">=</span> <span class="val">'Glasgow'</span>`,
+        content2: `<strong>BETWEEN — checks a range (inclusive, both ends included):</strong>`,
+        sql2: `<span class="kw">WHERE</span> salary <span class="kw">BETWEEN</span> <span class="val">20000</span> <span class="kw">AND</span> <span class="val">30000</span>
+<span class="cmt">-- same as: salary >= 20000 AND salary <= 30000</span>`,
+        warning: "Always use single quotes for text in Oracle. 'London' ✓  \"London\" ✗",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Type 3 & 4: IN + LIKE",
+        content: `<strong>IN — matches any value in a list:</strong>`,
+        sql: `<span class="kw">WHERE</span> position <span class="kw">IN</span> (<span class="val">'Manager'</span>, <span class="val">'Supervisor'</span>)
+<span class="cmt">-- cleaner than: position='Manager' OR position='Supervisor'</span>`,
+        content2: `<strong>LIKE — pattern matching:</strong>`,
+        wildcards: true,
+        sql2: `<span class="kw">WHERE</span> address <span class="kw">LIKE</span> <span class="val">'%Glasgow%'</span>
+<span class="cmt">-- address contains 'Glasgow' anywhere</span>
+
+<span class="kw">WHERE</span> fName <span class="kw">LIKE</span> <span class="val">'A%'</span>
+<span class="cmt">-- name starts with A</span>`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Type 5: IS NULL — The Trap",
+        content: `NULL means <em>unknown</em> or <em>missing</em>. It is <strong>not zero, not empty string</strong> — it's unknown.<br><br>
+You <strong>cannot</strong> use = NULL. It simply doesn't work in SQL.`,
+        sql: `<span class="cmt">-- WRONG — returns nothing, always:</span>
+<span class="kw">WHERE</span> comment <span class="op">=</span> <span class="val">NULL</span>
+
+<span class="cmt">-- CORRECT — always use IS NULL:</span>
+<span class="kw">WHERE</span> comment <span class="kw">IS NULL</span>
+
+<span class="cmt">-- For non-null values:</span>
+<span class="kw">WHERE</span> comment <span class="kw">IS NOT NULL</span>`,
+        warning: "IS NULL vs = NULL is one of the most common exam mistakes. Remember: IS NULL, always.",
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "Find staff whose salary is between 15,000 and 25,000. Which WHERE clause is correct?",
+        options: [
+          "WHERE salary > 15000 AND salary < 25000",
+          "WHERE salary BETWEEN 15000 AND 25000",
+          "WHERE salary IN (15000, 25000)",
+          "WHERE salary FROM 15000 TO 25000"
+        ],
+        correct: 1,
+        feedback: "✓ BETWEEN is correct. And remember: BETWEEN is inclusive — 15000 and 25000 are both included. Option A would exclude the endpoints."
+      },
+      {
+        type: "quiz",
+        question: "Find all properties where no comment was given after viewing. Which WHERE is correct?",
+        options: [
+          "WHERE comment = NULL",
+          "WHERE comment = ''",
+          "WHERE comment IS NULL",
+          "WHERE comment == NULL"
+        ],
+        correct: 2,
+        feedback: "✓ IS NULL. Never = NULL. NULL means unknown — you can't compare unknown with equals. IS NULL is the only way."
+      },
+      {
+        type: "quiz",
+        question: "Find all owners whose address contains the word 'Aberdeen'. Which LIKE pattern is correct?",
+        options: [
+          "LIKE 'Aberdeen'",
+          "LIKE '%Aberdeen'",
+          "LIKE 'Aberdeen%'",
+          "LIKE '%Aberdeen%'"
+        ],
+        correct: 3,
+        feedback: "✓ '%Aberdeen%' — the % before means anything can come before Aberdeen, the % after means anything can come after. So Aberdeen can appear anywhere in the address."
+      }
+    ]
+  },
+  {
+    id: 2,
+    name: "ORDER BY",
+    icon: "↕️",
+    color: "#ffe66d",
+    bg: "rgba(255,230,109,0.15)",
+    desc: "Sorting results, ASC, DESC, multiple keys",
+    steps: [
+      {
+        type: "learn",
+        title: "Sorting with ORDER BY",
+        content: `ORDER BY sorts your result. It goes at the <strong>very end</strong> of the query — always last.<br><br>
+<strong>ASC</strong> = ascending (A→Z, low→high) — this is the default<br>
+<strong>DESC</strong> = descending (Z→A, high→low)`,
+        sql: `<span class="kw">SELECT</span> staffNo, fName, salary
+<span class="kw">FROM</span> Staff
+<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>;
+<span class="cmt">-- highest salary first</span>`,
+        analogy: "ORDER BY is like clicking the column header in Excel to sort it.",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Multiple Sort Keys",
+        content: `When sorting by one column isn't enough — e.g. same property type, then sort by rent:<br><br>
+<strong>First key</strong> = major sort. <strong>Second key</strong> = tiebreaker (minor sort).`,
+        sql: `<span class="kw">SELECT</span> propertyNo, type, rent
+<span class="kw">FROM</span> PropertyForRent
+<span class="kw">ORDER BY</span> type <span class="kw">ASC</span>, rent <span class="kw">DESC</span>;
+<span class="cmt">-- sort by type A→Z first,
+-- then within each type, highest rent first</span>`,
+        content2: `Result: All Flats come first (alphabetically before House), and within Flats, the most expensive one appears first.`,
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "Which query lists all staff sorted by salary from highest to lowest?",
+        options: [
+          "SELECT * FROM Staff ORDER BY salary;",
+          "SELECT * FROM Staff ORDER BY salary ASC;",
+          "SELECT * FROM Staff ORDER BY salary DESC;",
+          "SELECT * FROM Staff SORT BY salary DESC;"
+        ],
+        correct: 2,
+        feedback: "✓ DESC = descending = highest first. Default (no keyword) = ASC = lowest first. And it's ORDER BY, not SORT BY."
+      },
+      {
+        type: "quiz",
+        question: "ORDER BY must always be placed _____ in a SELECT statement.",
+        options: [
+          "Right after SELECT",
+          "Right after FROM",
+          "Before WHERE",
+          "At the very end, after all other clauses"
+        ],
+        correct: 3,
+        feedback: "✓ ORDER BY is always last. The order is: SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY. Never changes."
+      }
+    ]
+  },
+  {
+    id: 3,
+    name: "Aggregate Functions",
+    icon: "∑",
+    color: "#a29bfe",
+    bg: "rgba(162,155,254,0.15)",
+    desc: "COUNT, SUM, AVG, MIN, MAX",
+    steps: [
+      {
+        type: "learn",
+        title: "Summarising Data",
+        content: `Aggregate functions collapse many rows into <strong>one summary value</strong>. Like the total at the bottom of an Excel column.<br><br>
+<strong>5 functions to know:</strong>`,
+        aggregates: true,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Using Aggregates",
+        content: `<strong>COUNT and SUM together:</strong>`,
+        sql: `<span class="kw">SELECT</span> <span class="fn">COUNT</span>(staffNo) <span class="kw">AS</span> myCount,
+       <span class="fn">SUM</span>(salary) <span class="kw">AS</span> mySum
+<span class="kw">FROM</span> Staff
+<span class="kw">WHERE</span> position = <span class="val">'Manager'</span>;
+<span class="cmt">-- Result: 2 managers, total salary 54000</span>`,
+        content2: `<strong>MIN, MAX, AVG:</strong>`,
+        sql2: `<span class="kw">SELECT</span> <span class="fn">MIN</span>(salary) <span class="kw">AS</span> lowest,
+       <span class="fn">MAX</span>(salary) <span class="kw">AS</span> highest,
+       <span class="fn">AVG</span>(salary) <span class="kw">AS</span> average
+<span class="kw">FROM</span> Staff;
+<span class="cmt">-- Result: 9000 | 30000 | 17000</span>`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "The Big Rule: No Mixing",
+        content: `You <strong>cannot</strong> put a plain column name and an aggregate function in SELECT without GROUP BY.<br><br>
+This is <strong>illegal:</strong>`,
+        sql: `<span class="cmt">-- ✗ ERROR: staffNo not in GROUP BY</span>
+<span class="kw">SELECT</span> staffNo, <span class="fn">COUNT</span>(salary)
+<span class="kw">FROM</span> Staff;`,
+        content2: `<strong>Also: aggregates cannot go in WHERE</strong>`,
+        sql2: `<span class="cmt">-- ✗ WRONG — aggregate in WHERE:</span>
+<span class="kw">WHERE</span> salary > <span class="fn">AVG</span>(salary)
+
+<span class="cmt">-- ✓ CORRECT — use subquery instead:</span>
+<span class="kw">WHERE</span> salary > (<span class="kw">SELECT</span> <span class="fn">AVG</span>(salary) <span class="kw">FROM</span> Staff)`,
+        warning: "AVG, SUM, COUNT, MIN, MAX — none of them can go inside WHERE. Use a subquery.",
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "How many properties cost more than £350 per month to rent?",
+        options: [
+          "SELECT SUM(*) FROM PropertyForRent WHERE rent > 350;",
+          "SELECT COUNT(*) FROM PropertyForRent WHERE rent > 350;",
+          "SELECT TOTAL(*) FROM PropertyForRent WHERE rent > 350;",
+          "SELECT COUNT(rent > 350) FROM PropertyForRent;"
+        ],
+        correct: 1,
+        feedback: "✓ COUNT(*) counts all rows that match the WHERE condition. SUM adds values up — it doesn't count rows."
+      },
+      {
+        type: "quiz",
+        question: "Which of these is ILLEGAL in SQL?",
+        options: [
+          "SELECT COUNT(*) FROM Staff;",
+          "SELECT MIN(salary), MAX(salary) FROM Staff;",
+          "SELECT staffNo, COUNT(salary) FROM Staff;",
+          "SELECT AVG(salary) FROM Staff WHERE position = 'Manager';"
+        ],
+        correct: 2,
+        feedback: "✓ Option C is illegal. staffNo is a plain column and COUNT(salary) is an aggregate — you can't mix them without GROUP BY. The others are all valid."
+      }
+    ]
+  },
+  {
+    id: 4,
+    name: "GROUP BY + HAVING",
+    icon: "📊",
+    color: "#fd79a8",
+    bg: "rgba(253,121,168,0.15)",
+    desc: "Grouping data, filtering groups",
+    steps: [
+      {
+        type: "learn",
+        title: "GROUP BY — Subtotals per Group",
+        content: `GROUP BY is like "find the total salary <em>for each branch</em>" — you want one summary row per group, not one summary for everything.<br><br>
+<strong>Example: How many staff in each branch?</strong>`,
+        sql: `<span class="kw">SELECT</span> branchNo,
+       <span class="fn">COUNT</span>(staffNo) <span class="kw">AS</span> staffCount,
+       <span class="fn">SUM</span>(salary) <span class="kw">AS</span> totalSalary
+<span class="kw">FROM</span> Staff
+<span class="kw">GROUP BY</span> branchNo
+<span class="kw">ORDER BY</span> branchNo;`,
+        content2: `<strong>Result — one row per branch:</strong>`,
+        table: {
+          headers: ["branchNo", "staffCount", "totalSalary"],
+          rows: [["B003","3","54000"], ["B005","2","39000"], ["B007","1","9000"]]
+        },
+        analogy: "GROUP BY is like a pivot table in Excel — it groups rows and summarises each group.",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "GROUP BY Rule",
+        content: `<strong>The rule you must remember:</strong><br><br>
+Every column in SELECT that is <em>NOT inside an aggregate function</em> <strong>must appear in GROUP BY</strong>.<br><br>
+In the previous example:<br>
+✓ branchNo → in GROUP BY<br>
+✓ COUNT(staffNo) → inside aggregate, no need<br>
+✓ SUM(salary) → inside aggregate, no need`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "HAVING — Filter After Grouping",
+        content: `HAVING filters <strong>groups</strong> — like WHERE but for GROUP BY.<br><br>
+<strong>Only show branches with more than 1 staff member:</strong>`,
+        sql: `<span class="kw">SELECT</span> branchNo, <span class="fn">COUNT</span>(staffNo) <span class="kw">AS</span> cnt
+<span class="kw">FROM</span> Staff
+<span class="kw">GROUP BY</span> branchNo
+<span class="kw">HAVING</span> <span class="fn">COUNT</span>(staffNo) <span class="op">></span> <span class="val">1</span>
+<span class="kw">ORDER BY</span> branchNo;`,
+        content2: `<strong>WHERE vs HAVING — the most tested difference:</strong>`,
+        compareWH: true,
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "You want the average salary per position, but only positions with average salary above 15,000. What do you add?",
+        options: [
+          "WHERE AVG(salary) > 15000",
+          "HAVING salary > 15000",
+          "HAVING AVG(salary) > 15000",
+          "WHERE position HAVING AVG > 15000"
+        ],
+        correct: 2,
+        feedback: "✓ HAVING because we're filtering a group (a position). AVG(salary) inside HAVING because it's an aggregate — aggregates can't go in WHERE."
+      },
+      {
+        type: "quiz",
+        question: "Which query finds the number of staff in each branch, only for branches in Glasgow?",
+        options: [
+          "SELECT branchNo, COUNT(*) FROM Staff GROUP BY branchNo HAVING city = 'Glasgow';",
+          "SELECT branchNo, COUNT(*) FROM Staff WHERE city = 'Glasgow' GROUP BY branchNo;",
+          "SELECT branchNo, COUNT(*) FROM Staff GROUP BY branchNo WHERE city = 'Glasgow';",
+          "SELECT branchNo, COUNT(*) FROM Staff HAVING city = 'Glasgow' GROUP BY branchNo;"
+        ],
+        correct: 1,
+        feedback: "✓ City filter goes in WHERE (filters individual rows before grouping). GROUP BY comes after WHERE. HAVING is only for aggregate-based group filters."
+      }
+    ]
+  },
+  {
+    id: 5,
+    name: "Subqueries",
+    icon: "🪆",
+    color: "#00cec9",
+    bg: "rgba(0,206,201,0.15)",
+    desc: "Query inside a query, = vs IN",
+    steps: [
+      {
+        type: "learn",
+        title: "A Query Inside a Query",
+        content: `A subquery is a SELECT statement <strong>inside</strong> another SELECT statement.<br><br>
+The <em>inner query runs first</em>. Its result is used by the outer query.<br><br>
+Think of it like: inner query does the research → outer query acts on it.`,
+        analogy: "It's like asking a colleague: 'Which branch is on Main St?' → they say B003 → you then ask: 'Who works in B003?'",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "When to Use = vs IN",
+        content: `<strong>Use = when inner query returns EXACTLY ONE value:</strong>`,
+        sql: `<span class="kw">SELECT</span> staffNo, fName, lName
+<span class="kw">FROM</span> Staff
+<span class="kw">WHERE</span> branchNo <span class="op">=</span> (
+  <span class="kw">SELECT</span> branchNo
+  <span class="kw">FROM</span> Branch
+  <span class="kw">WHERE</span> street <span class="op">=</span> <span class="val">'163 Main St'</span>
+);
+<span class="cmt">-- inner query returns 'B003' (one value)
+-- outer query: WHERE branchNo = 'B003'</span>`,
+        content2: `<strong>Use IN when inner query returns MULTIPLE values:</strong>`,
+        sql2: `<span class="kw">SELECT</span> propertyNo
+<span class="kw">FROM</span> PropertyForRent
+<span class="kw">WHERE</span> staffNo <span class="kw">IN</span> (
+  <span class="kw">SELECT</span> staffNo
+  <span class="kw">FROM</span> Staff
+  <span class="kw">WHERE</span> branchNo <span class="op">=</span> <span class="val">'B003'</span>
+);
+<span class="cmt">-- inner query returns multiple staffNo values</span>`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Subquery with Aggregate",
+        content: `You <strong>cannot</strong> use AVG() directly in WHERE. The fix is a subquery.<br><br>
+<strong>Find staff earning above average salary:</strong>`,
+        sql: `<span class="cmt">-- ✗ This is ILLEGAL:</span>
+<span class="kw">WHERE</span> salary > <span class="fn">AVG</span>(salary)
+
+<span class="cmt">-- ✓ Use subquery instead:</span>
+<span class="kw">SELECT</span> staffNo, fName, salary
+<span class="kw">FROM</span> Staff
+<span class="kw">WHERE</span> salary > (
+  <span class="kw">SELECT</span> <span class="fn">AVG</span>(salary) <span class="kw">FROM</span> Staff
+);
+<span class="cmt">-- inner query returns 17000
+-- outer: WHERE salary > 17000</span>`,
+        warning: "This pattern — WHERE col > (SELECT AVG(...)) — is almost guaranteed to appear in your exam.",
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "List properties managed by staff who work at branch B003. The staff query returns multiple rows. Which is correct?",
+        options: [
+          "WHERE staffNo = (SELECT staffNo FROM Staff WHERE branchNo = 'B003')",
+          "WHERE staffNo IN (SELECT staffNo FROM Staff WHERE branchNo = 'B003')",
+          "WHERE staffNo FROM (SELECT staffNo FROM Staff WHERE branchNo = 'B003')",
+          "WHERE staffNo = ALL (SELECT staffNo FROM Staff WHERE branchNo = 'B003')"
+        ],
+        correct: 1,
+        feedback: "✓ Multiple values = use IN, not =. If you use = with multiple rows returned, Oracle gives an error: 'single-row subquery returns more than one row'."
+      },
+      {
+        type: "quiz",
+        question: "Why can't you write: WHERE salary > AVG(salary)?",
+        options: [
+          "Because AVG is not a valid function",
+          "Because aggregate functions cannot be used in the WHERE clause",
+          "Because salary is not a number",
+          "Because you need DISTINCT first"
+        ],
+        correct: 1,
+        feedback: "✓ Aggregate functions (AVG, SUM, COUNT, MIN, MAX) are NOT allowed in WHERE. Use a subquery: WHERE salary > (SELECT AVG(salary) FROM Staff)."
+      }
+    ]
+  },
+  {
+    id: 6,
+    name: "Joins",
+    icon: "🔗",
+    color: "#6c5ce7",
+    bg: "rgba(108,92,231,0.15)",
+    desc: "INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN",
+    steps: [
+      {
+        type: "learn",
+        title: "Why Joins?",
+        content: `Sometimes the data you need is spread across <strong>two tables</strong>. A join combines them.<br><br>
+Example: You want client names AND what properties they viewed.<br>
+Client names → Client table<br>
+Properties viewed → Viewing table<br><br>
+You need a <em>join</em> to bring them together.`,
+        analogy: "A join is like doing a VLOOKUP in Excel — you match rows from two sheets using a common column.",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Inner Join — The Most Common",
+        content: `Inner join returns only rows where the <strong>matching column has the same value in both tables</strong>. Unmatched rows are dropped.`,
+        sql: `<span class="kw">SELECT</span> c.clientNo, fName, lName, propertyNo, comment
+<span class="kw">FROM</span> Client c, Viewing v
+<span class="kw">WHERE</span> c.clientNo <span class="op">=</span> v.clientNo;
+<span class="cmt">-- c and v are aliases (short names) for the tables
+-- c.clientNo = v.clientNo is the join condition</span>`,
+        content2: `The <strong>alias</strong> (c, v) is needed when both tables have the same column name — otherwise SQL doesn't know which table you mean.<br><br>
+<strong>Without WHERE join condition = DISASTER</strong> (every row × every row = garbage):`,
+        sql2: `<span class="cmt">-- 4 clients × 5 viewings = 20 useless rows:</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> Client, Viewing; <span class="cmt">-- NEVER do this</span>`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "Outer Joins — Keeping Unmatched Rows",
+        content: `When you want rows even if there's <strong>no match</strong> in the other table — use an outer join. Unmatched columns are filled with NULL.`,
+        joinVisual: true,
+        sql: `<span class="cmt">-- LEFT JOIN: all branches, even without property</span>
+<span class="kw">SELECT</span> b.*, p.*
+<span class="kw">FROM</span> Branch b
+  <span class="kw">LEFT JOIN</span> PropertyForRent p
+  <span class="kw">ON</span> b.bCity <span class="op">=</span> p.pCity;
+
+<span class="cmt">-- RIGHT JOIN: all properties, even without branch</span>
+<span class="kw">FROM</span> Branch b <span class="kw">RIGHT JOIN</span> PropertyForRent p
+  <span class="kw">ON</span> b.bCity <span class="op">=</span> p.pCity`,
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "You join Client and Viewing tables but forget the WHERE join condition. What happens?",
+        options: [
+          "You get only matching rows",
+          "You get an error",
+          "You get every client row paired with every viewing row (Cartesian product)",
+          "You get an empty result"
+        ],
+        correct: 2,
+        feedback: "✓ Without a join condition, Oracle creates a Cartesian product — every row from Client × every row from Viewing. With 4 clients and 5 viewings, that's 20 mostly meaningless rows."
+      },
+      {
+        type: "quiz",
+        question: "You want ALL branches listed, and if a branch has properties in the same city, show them — but show branches even if they have NO matching properties. Which join?",
+        options: [
+          "INNER JOIN",
+          "LEFT JOIN with Branch on the left",
+          "RIGHT JOIN with Branch on the right",
+          "FULL JOIN"
+        ],
+        correct: 1,
+        feedback: "✓ LEFT JOIN keeps ALL rows from the LEFT table (Branch) even with no match in PropertyForRent. Unmatched property columns show as NULL."
+      },
+      {
+        type: "quiz",
+        question: "Why do we use table aliases like 'c' and 'v' in joins?",
+        options: [
+          "To make the query run faster",
+          "To avoid ambiguity when both tables have columns with the same name",
+          "It is required by Oracle SQL",
+          "To group the results"
+        ],
+        correct: 1,
+        feedback: "✓ Both Client and Viewing have a column called clientNo. Without aliases, SQL doesn't know which table's clientNo you mean. c.clientNo means 'clientNo from Client table'."
+      }
+    ]
+  },
+  {
+    id: 7,
+    name: "Set Ops + DML",
+    icon: "✏️",
+    color: "#00b894",
+    bg: "rgba(0,184,148,0.15)",
+    desc: "UNION, INTERSECT, MINUS + INSERT, UPDATE, DELETE",
+    steps: [
+      {
+        type: "learn",
+        title: "Set Operations",
+        content: `Set operations combine results from <strong>two separate queries</strong> into one result.<br><br>
+<strong>Rule:</strong> both queries must return the <em>same number of columns</em> with compatible data types.`,
+        sql: `<span class="cmt">-- UNION: cities in Branch OR PropertyForRent (no dups)</span>
+<span class="kw">SELECT</span> city <span class="kw">FROM</span> Branch
+<span class="kw">UNION</span>
+<span class="kw">SELECT</span> city <span class="kw">FROM</span> PropertyForRent;
+
+<span class="cmt">-- INTERSECT: cities in BOTH tables</span>
+<span class="kw">SELECT</span> city <span class="kw">FROM</span> Branch
+<span class="kw">INTERSECT</span>
+<span class="kw">SELECT</span> city <span class="kw">FROM</span> PropertyForRent;
+
+<span class="cmt">-- MINUS (Oracle): cities in Branch but NOT in PropertyForRent</span>
+<span class="kw">SELECT</span> city <span class="kw">FROM</span> Branch
+<span class="kw">MINUS</span>
+<span class="kw">SELECT</span> city <span class="kw">FROM</span> PropertyForRent;`,
+        warning: "Oracle uses MINUS not EXCEPT. If you write EXCEPT in Oracle, you get an error.",
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "INSERT — Adding Rows",
+        content: `Two ways to INSERT:<br><br>
+<strong>1. Direct values:</strong>`,
+        sql: `<span class="kw">INSERT INTO</span> Staff
+<span class="kw">VALUES</span> (<span class="val">'SG16'</span>, <span class="val">'Alan'</span>, <span class="val">'Brown'</span>,
+        <span class="val">'Assistant'</span>, <span class="val">'M'</span>, <span class="val">8300</span>, <span class="val">'B003'</span>);`,
+        content2: `<strong>2. Specific columns only:</strong>`,
+        sql2: `<span class="kw">INSERT INTO</span> Staff (staffNo, fName, lName, position, salary, branchNo)
+<span class="kw">VALUES</span> (<span class="val">'SG44'</span>, <span class="val">'Anne'</span>, <span class="val">'Jones'</span>, <span class="val">'Assistant'</span>, <span class="val">8100</span>, <span class="val">'B003'</span>);
+<span class="cmt">-- columns not listed (like sex, DOB) will be NULL</span>`,
+        extra: null
+      },
+      {
+        type: "learn",
+        title: "UPDATE + DELETE",
+        content: `<strong>UPDATE — change existing rows:</strong>`,
+        sql: `<span class="cmt">-- Give all Managers a 5% raise:</span>
+<span class="kw">UPDATE</span> Staff
+<span class="kw">SET</span> salary = salary * <span class="val">1.05</span>
+<span class="kw">WHERE</span> position = <span class="val">'Manager'</span>;
+
+<span class="cmt">-- Update multiple columns at once:</span>
+<span class="kw">UPDATE</span> Staff
+<span class="kw">SET</span> position = <span class="val">'Manager'</span>, salary = <span class="val">18000</span>
+<span class="kw">WHERE</span> staffNo = <span class="val">'SG14'</span>;`,
+        content2: `<strong>DELETE — remove rows:</strong>`,
+        sql2: `<span class="cmt">-- Delete specific rows:</span>
+<span class="kw">DELETE FROM</span> Viewing
+<span class="kw">WHERE</span> propertyNo = <span class="val">'PG4'</span>;
+
+<span class="cmt">-- Delete ALL rows (table stays, all data gone):</span>
+<span class="kw">DELETE FROM</span> Viewing;`,
+        warning: "UPDATE or DELETE without WHERE affects EVERY row. Always double-check before running.",
+        extra: null
+      },
+      {
+        type: "quiz",
+        question: "You want cities that appear in BOTH the Branch table AND the PropertyForRent table. Which operation?",
+        options: [
+          "UNION",
+          "MINUS",
+          "INTERSECT",
+          "JOIN"
+        ],
+        correct: 2,
+        feedback: "✓ INTERSECT returns rows common to both queries — cities that exist in both tables. UNION gives all cities from either. MINUS gives cities in first but not second."
+      },
+      {
+        type: "quiz",
+        question: "Give ALL staff a 3% pay increase. Which is correct?",
+        options: [
+          "UPDATE Staff SET salary = salary * 1.03 WHERE ALL;",
+          "UPDATE Staff SET salary = salary * 1.03;",
+          "UPDATE ALL Staff SET salary = salary * 1.03;",
+          "INSERT INTO Staff salary = salary * 1.03;"
+        ],
+        correct: 1,
+        feedback: "✓ No WHERE clause = affects all rows. That's intentional here since we want all staff. UPDATE table SET column = expression — that's the syntax."
+      },
+      {
+        type: "quiz",
+        question: "What is the difference between DELETE FROM Viewing WHERE propertyNo='PG4' and DELETE FROM Viewing?",
+        options: [
+          "No difference, both do the same thing",
+          "First deletes only PG4 rows; second deletes ALL rows from Viewing",
+          "First deletes the table; second deletes the rows",
+          "Second one gives an error without WHERE"
+        ],
+        correct: 1,
+        feedback: "✓ WHERE makes it specific. Without WHERE, ALL rows are deleted — but the table structure remains (use DROP TABLE to remove the table itself)."
+      }
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let currentTopic = 0;
+let currentStep = 0;
+let quizAnswered = false;
+let quizCorrect = 0;
+let quizTotal = 0;
+const progress = JSON.parse(localStorage.getItem('sqlprog') || '{}');
+
+// ═══════════════════════════════════════════════════════
+// HOME
+// ═══════════════════════════════════════════════════════
+function renderHome() {
+  const list = document.getElementById('topicList');
+  list.innerHTML = '';
+  let done = 0;
+  topics.forEach((t, i) => {
+    const isDone = progress[i] === true;
+    if (isDone) done++;
+    const quizSteps = t.steps.filter(s => s.type === 'quiz').length;
+    const card = document.createElement('div');
+    card.className = 'topic-card' + (isDone ? ' done' : '');
+    card.onclick = () => startTopic(i);
+    card.innerHTML = `
+      <div class="topic-icon" style="background:${t.bg}; color:${t.color}">${t.icon}</div>
+      <div class="topic-info">
+        <div class="topic-name">${t.name}</div>
+        <div class="topic-desc">${t.desc}</div>
+        <div class="topic-progress">
+          ${Array(t.steps.length).fill(0).map((_,si) => `<div class="topic-dot${isDone ? ' filled' : ''}"></div>`).join('')}
+        </div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+  const pct = Math.round((done / topics.length) * 100);
+  document.getElementById('overallProgress').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done} of ${topics.length} topics done`;
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+// ═══════════════════════════════════════════════════════
+// LESSON
+// ═══════════════════════════════════════════════════════
+function startTopic(idx) {
+  currentTopic = idx;
+  currentStep = 0;
+  quizCorrect = 0;
+  quizTotal = 0;
+  const t = topics[idx];
+  document.getElementById('lessonTitle').textContent = t.name;
+  showScreen('lesson');
+  renderStep();
+}
+
+function renderStep() {
+  const t = topics[currentTopic];
+  const s = t.steps[currentStep];
+  const total = t.steps.length;
+  document.getElementById('lessonStepCount').textContent = `Step ${currentStep + 1} of ${total}`;
+  document.getElementById('lessonProgressFill').style.width = ((currentStep + 1) / total * 100) + '%';
+  document.getElementById('lessonBody').scrollTop = 0;
+
+  const body = document.getElementById('lessonBody');
+  body.innerHTML = '';
+
+  const stepDiv = document.createElement('div');
+  stepDiv.className = 'lesson-step active';
+
+  if (s.type === 'learn') {
+    stepDiv.innerHTML = buildLearnStep(s);
+  } else if (s.type === 'quiz') {
+    stepDiv.innerHTML = buildQuizStep(s);
+    quizAnswered = false;
+  }
+
+  body.appendChild(stepDiv);
+
+  const btn = document.getElementById('nextBtn');
+  if (s.type === 'quiz') {
+    btn.textContent = 'Select an answer';
+    btn.disabled = true;
+  } else {
+    btn.textContent = currentStep === total - 1 ? 'Finish Topic ✓' : 'Got it →';
+    btn.disabled = false;
+  }
+}
+
+function buildLearnStep(s) {
+  let h = '';
+  h += `<div class="step-type-badge badge-learn">📖 Learn</div>`;
+  h += `<div class="step-title">${s.title}</div>`;
+  if (s.content) h += `<div class="step-body">${s.content}</div>`;
+  if (s.analogy) h += `<div class="analogy-box"><div class="label">💡 Think of it this way</div>${s.analogy}</div>`;
+  if (s.sql) h += `<div class="sql-block">${s.sql}</div>`;
+  if (s.content2) h += `<div class="step-body">${s.content2}</div>`;
+  if (s.sql2) h += `<div class="sql-block">${s.sql2}</div>`;
+  if (s.content3) h += `<div class="step-body">${s.content3}</div>`;
+  if (s.sql3) h += `<div class="sql-block">${s.sql3}</div>`;
+  if (s.content4) h += `<div class="step-body">${s.content4}</div>`;
+  if (s.sql4) h += `<div class="sql-block">${s.sql4}</div>`;
+  if (s.warning) h += `<div class="warning-box"><span>⚠️</span><span>${s.warning}</span></div>`;
+  if (s.wildcards) {
+    h += `<div class="wildcard-grid">
+      <div class="wc-card"><div class="wc-symbol">%</div><div class="wc-meaning">Any sequence of characters (including zero)</div><div class="wc-example">'A%' → starts with A<br>'%e' → ends with e</div></div>
+      <div class="wc-card"><div class="wc-symbol">_</div><div class="wc-meaning">Exactly one character</div><div class="wc-example">'H___' → exactly 4 chars starting H</div></div>
+    </div>`;
+  }
+  if (s.aggregates) {
+    h += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;margin:10px 0">`;
+    [['COUNT(*)', 'Count ALL rows (including NULLs)'],['COUNT(col)','Count non-null values only'],['SUM(col)','Total of all values — numbers only'],['AVG(col)','Average value — numbers only'],['MIN(col)','Smallest value'],['MAX(col)','Largest value']].forEach(([fn, desc]) => {
+      h += `<div class="agg-row"><div class="agg-fn">${fn}</div><div class="agg-desc">${desc}</div></div>`;
+    });
+    h += `</div>`;
+  }
+  if (s.table) {
+    h += `<table class="data-table"><thead><tr>${s.table.headers.map(hh=>`<th>${hh}</th>`).join('')}</tr></thead><tbody>`;
+    s.table.rows.forEach(r => { h += `<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`; });
+    h += `</tbody></table>`;
+  }
+  if (s.compareWH) {
+    h += `<div class="compare-row">
+      <div class="compare-cell"><div class="ch" style="color:var(--accent2)">WHERE</div>Filters individual <strong>rows</strong><br>Applied BEFORE grouping<br>Cannot use aggregates</div>
+      <div class="compare-cell"><div class="ch" style="color:var(--accent3)">HAVING</div>Filters <strong>groups</strong><br>Applied AFTER grouping<br>CAN use aggregates</div>
+    </div>`;
+  }
+  if (s.joinVisual) {
+    h += `<div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap">
+      ${[['INNER','Only matching rows','#4ecdc4'],['LEFT','All left + matched right','#a29bfe'],['RIGHT','All right + matched left','#fd79a8'],['FULL','All rows from both','#ffe66d']].map(([n,d,c]) =>
+        `<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;flex:1;min-width:120px;text-align:center">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:${c}">${n}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">${d}</div>
+        </div>`).join('')}
+    </div>`;
+  }
+  return h;
+}
+
+function buildQuizStep(s) {
+  let h = '';
+  h += `<div class="step-type-badge badge-quiz">❓ Quiz</div>`;
+  h += `<div class="quiz-question">${s.question}</div>`;
+  h += `<div class="quiz-options">`;
+  s.options.forEach((opt, i) => {
+    h += `<div class="quiz-option" onclick="selectOption(${i})" id="opt${i}">${opt}</div>`;
+  });
+  h += `</div>`;
+  h += `<div class="quiz-feedback" id="quizFeedback"></div>`;
+  return h;
+}
+
+function selectOption(idx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const s = topics[currentTopic].steps[currentStep];
+  quizTotal++;
+  const isCorrect = idx === s.correct;
+  if (isCorrect) quizCorrect++;
+
+  s.options.forEach((_, i) => {
+    const el = document.getElementById('opt' + i);
+    el.classList.add('disabled');
+    if (i === s.correct) el.classList.add('correct');
+    else if (i === idx && !isCorrect) el.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('quizFeedback');
+  fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct-fb' : 'wrong-fb');
+  fb.innerHTML = (isCorrect ? '✅ ' : '❌ Correct answer: ' + s.options[s.correct] + '<br>') + s.feedback;
+
+  const btn = document.getElementById('nextBtn');
+  const isLast = currentStep === topics[currentTopic].steps.length - 1;
+  btn.textContent = isLast ? 'Finish Topic ✓' : 'Next →';
+  btn.disabled = false;
+}
+
+function nextStep() {
+  const t = topics[currentTopic];
+  if (currentStep < t.steps.length - 1) {
+    currentStep++;
+    renderStep();
+    document.getElementById('lessonBody').scrollTop = 0;
+  } else {
+    finishTopic();
+  }
+}
+
+function finishTopic() {
+  progress[currentTopic] = true;
+  localStorage.setItem('sqlprog', JSON.stringify(progress));
+  document.getElementById('scoreNum').textContent = `${quizCorrect}/${quizTotal}`;
+  const msgs = [
+    ['🔥 Nailed it!', "Every question correct. Keep going."],
+    ['👍 Good work!', "Mostly right. Review what you missed."],
+    ['📖 Review needed', "Go back and read the explanations again."]
+  ];
+  const pct = quizTotal > 0 ? quizCorrect / quizTotal : 1;
+  const [title, sub] = pct === 1 ? msgs[0] : pct >= 0.6 ? msgs[1] : msgs[2];
+  document.querySelector('.complete-title').textContent = title;
+  document.getElementById('completeMsg').textContent = sub;
+  const nextIdx = currentTopic + 1;
+  const nextBtn = document.getElementById('nextTopicBtn');
+  if (nextIdx < topics.length) {
+    nextBtn.textContent = `Next: ${topics[nextIdx].name} →`;
+    nextBtn.style.display = 'block';
+  } else {
+    nextBtn.style.display = 'none';
+  }
+  showScreen('complete');
+}
+
+function goNextTopic() {
+  const nextIdx = currentTopic + 1;
+  if (nextIdx < topics.length) startTopic(nextIdx);
+}
+
+function goHome() {
+  renderHome();
+  showScreen('home');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+renderHome();
+</script>
+</body>
+</html>
