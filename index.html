@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abidunnisa Begum — Product Manager</title>
+  <title>Abidunnisa Begum | Product Manager — Data, AI &amp; Digital Products</title>
+  <meta name="description" content="Product Manager working across data, AI and digital products. Built and launched consumer, AI and founder-led products from zero to one; strong SQL and analytics depth. Based in Hyderabad, India." />
+  <link rel="canonical" href="https://abidunnisa.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Abidunnisa Begum | Product Manager — Data, AI &amp; Digital Products" />
+  <meta property="og:description" content="Product Manager working across data, AI and digital products. Built and launched consumer, AI and founder-led products from zero to one." />
+  <meta property="og:url" content="https://abidunnisa.github.io/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Abidunnisa Begum | Product Manager — Data, AI &amp; Digital Products" />
+  <meta name="twitter:description" content="Product Manager working across data, AI and digital products. Built and launched consumer, AI and founder-led products from zero to one." />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,45 +25,22 @@
       --muted: #a0a0a0;
       --card-bg: #161616;
       --border: #1f1f1f;
+      --line: #2a2a2a;
+      --amber: #ffb400;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; background: var(--black); }
 
     body {
-      background: #0a0a0a !important;
-      background-color: #0a0a0a !important;
-      color: #ffffff !important;
+      background: var(--black);
+      color: var(--white);
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       overflow-x: hidden;
-      cursor: none;
+      line-height: 1.5;
     }
-    html { background: #0a0a0a !important; }
 
-    /* Custom cursor */
-    .cursor {
-      width: 12px; height: 12px;
-      background: var(--green);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.15s ease, opacity 0.2s;
-      transform: translate(-50%, -50%);
-    }
-    .cursor-ring {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(0,201,141,0.4);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s;
-    }
-    body:hover .cursor { opacity: 1; }
-
-    /* Grain overlay */
+    /* Grain overlay (kept from original) */
     body::before {
       content: '';
       position: fixed;
@@ -65,667 +51,784 @@
       opacity: 0.4;
     }
 
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+    .skip-link {
+      position: absolute; left: 16px; top: -60px;
+      background: var(--green); color: var(--black);
+      padding: 10px 16px; font-size: 13px; font-weight: 600;
+      z-index: 1000; text-decoration: none;
+    }
+    .skip-link:focus { top: 12px; }
+
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 500;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 24px 48px;
-      background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+      display: flex; justify-content: space-between; align-items: center; gap: 24px;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.96), rgba(10,10,10,0.7) 70%, transparent);
     }
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 3px;
-      color: var(--green);
-      text-decoration: none;
+      font-size: 22px; letter-spacing: 3px;
+      color: var(--green); text-decoration: none; flex-shrink: 0;
     }
-    .nav-links { display: flex; gap: 36px; }
+    .nav-links { display: flex; gap: 28px; }
     .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase;
+      transition: color 0.2s; white-space: nowrap; padding: 6px 0;
     }
     .nav-links a:hover { color: var(--white); }
 
     /* HERO */
     .hero {
-      min-height: 100vh;
+      min-height: 92vh;
       display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 48px 80px;
-      position: relative;
-      overflow: hidden;
-      background: #0a0a0a;
+      padding: 120px 48px 72px;
+      position: relative; overflow: hidden;
     }
     .hero-bg-text {
-      position: absolute;
-      top: 50%; left: 50%;
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(120px, 22vw, 320px);
       color: transparent;
       -webkit-text-stroke: 1px rgba(255,255,255,0.05);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
+      white-space: nowrap; pointer-events: none; user-select: none;
       letter-spacing: -4px;
     }
+    .hero > *:not(.hero-bg-text) { position: relative; }
     .hero-tag {
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 24px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
+      font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 24px;
     }
     .hero-name {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(52px, 8vw, 112px);
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 32px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-      color: #ffffff;
+      font-weight: 400;
+      font-size: clamp(48px, 8vw, 108px);
+      line-height: 0.98; letter-spacing: -2px;
+      margin-bottom: 32px; color: var(--white);
     }
-    .hero-name em {
-      font-style: italic;
-      color: var(--green);
-    }
+    .hero-name em { font-style: italic; color: var(--green); }
     .hero-desc {
-      max-width: 520px;
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--muted);
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
+      max-width: 560px; font-size: 17px; line-height: 1.7;
+      color: var(--muted); margin-bottom: 44px;
     }
-    .hero-cta {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.8s forwards;
-    }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn-primary {
-      background: var(--green);
-      color: var(--black);
-      padding: 14px 32px;
-      border-radius: 2px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
+      background: var(--green); color: var(--black);
+      padding: 14px 32px; border-radius: 2px;
+      font-size: 13px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s;
     }
-    .btn-primary:hover { background: #00e6a0; transform: translateY(-2px); }
+    .btn-primary:hover { background: #00e6a0; }
     .btn-outline {
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 14px 32px;
-      border-radius: 2px;
-      font-size: 13px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: border-color 0.2s, transform 0.2s;
+      border: 1px solid var(--line); color: var(--white);
+      padding: 14px 32px; border-radius: 2px;
+      font-size: 13px; letter-spacing: 1px;
+      text-transform: uppercase; text-decoration: none;
+      transition: border-color 0.2s;
     }
-    .btn-outline:hover { border-color: var(--green); transform: translateY(-2px); }
+    .btn-outline:hover { border-color: var(--green); }
 
-    .hero-scroll {
-      position: absolute; right: 48px; bottom: 80px;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-tag, .hero-name, .hero-desc, .hero-cta { opacity: 0; animation: fadeUp 0.8s ease forwards; }
+      .hero-name { animation-delay: 0.15s; }
+      .hero-desc { animation-delay: 0.3s; }
+      .hero-cta { animation-delay: 0.45s; }
     }
-    .hero-scroll span {
-      font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
-      writing-mode: vertical-rl;
-    }
-    .scroll-line {
-      width: 1px; height: 60px;
-      background: linear-gradient(to bottom, var(--green), transparent);
-      animation: scrollPulse 2s ease infinite;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ABOUT STRIP */
+    /* PROOF STRIP */
     .about-strip {
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 32px 48px;
+      padding: 28px 48px;
       display: flex; gap: 48px; flex-wrap: wrap; align-items: center;
     }
     .stat { display: flex; flex-direction: column; gap: 4px; }
     .stat-number {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 40px;
-      color: var(--green);
-      line-height: 1;
+      font-size: 40px; color: var(--green); line-height: 1;
     }
-    .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+    .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; max-width: 200px; }
     .stat-divider { width: 1px; height: 48px; background: var(--border); }
+    .stat-now .stat-number { font-size: 22px; font-family: 'DM Sans', sans-serif; font-weight: 500; color: var(--white); line-height: 1.2; }
 
-    /* SECTION */
-    section { padding: 100px 48px; }
+    /* SECTIONS */
+    section { padding: 96px 48px; }
     .section-label {
       font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
       color: var(--green); margin-bottom: 16px;
     }
     .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(36px, 5vw, 64px);
-      line-height: 1.1;
-      margin-bottom: 64px;
-      color: #ffffff;
+      font-family: 'DM Serif Display', serif; font-weight: 400;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.1; margin-bottom: 20px; color: var(--white);
     }
     .section-title em { font-style: italic; color: var(--green); }
+    .section-intro { max-width: 620px; color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 56px; }
 
-    /* PROJECTS */
+    /* PRODUCT CARDS */
     .projects-grid { display: flex; flex-direction: column; gap: 2px; }
-
     .project-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 40px 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: start;
-      transition: border-color 0.3s, background 0.3s;
+      padding: 36px 48px;
       position: relative;
-      overflow: hidden;
-      cursor: pointer;
     }
     .project-card::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--green);
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
-      transform-origin: bottom;
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--green);
     }
-    .project-card:hover { border-color: rgba(0,201,141,0.3); background: #181818; }
-    .project-card:hover::before { transform: scaleY(1); }
-
-    .project-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 13px; letter-spacing: 3px;
-      color: var(--muted); margin-bottom: 16px;
+    .card-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 24px; flex-wrap: wrap; margin-bottom: 14px;
     }
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 28px; margin-bottom: 12px; color: #ffffff;
-    }
-    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 600px; }
-    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .project-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .tag {
-      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-      border: 1px solid var(--border);
-      padding: 4px 12px; border-radius: 100px;
-      color: var(--muted);
+      font-size: 12px; letter-spacing: 0.3px;
+      border: 1px solid var(--line);
+      padding: 4px 12px; border-radius: 100px; color: var(--muted);
     }
     .tag.green { border-color: var(--green); color: var(--green); }
-
-    .project-meta { text-align: right; }
+    .project-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
     .project-status {
-      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-      padding: 6px 14px; border-radius: 100px;
-      display: inline-block; margin-bottom: 16px;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px;
     }
     .status-live { background: rgba(0,201,141,0.1); color: var(--green); border: 1px solid rgba(0,201,141,0.3); }
-    .status-progress { background: rgba(255,180,0,0.1); color: #ffb400; border: 1px solid rgba(255,180,0,0.3); }
-    .project-role { font-size: 12px; color: var(--muted); }
-
-    .project-arrow {
-      position: absolute; right: 48px; bottom: 40px;
-      font-size: 24px; color: var(--green);
-      opacity: 0; transform: translateX(-8px);
-      transition: opacity 0.3s, transform 0.3s;
+    .status-progress { background: rgba(255,180,0,0.1); color: var(--amber); border: 1px solid rgba(255,180,0,0.3); }
+    .project-role { font-size: 13px; color: var(--muted); }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px; margin-bottom: 10px; color: var(--white); font-weight: 400;
     }
-    .project-card:hover .project-arrow { opacity: 1; transform: translateX(0); }
+    .project-desc { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 680px; }
+    .card-links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
+    .card-link {
+      font-size: 13px; color: var(--green); text-decoration: none;
+      border-bottom: 1px solid rgba(0,201,141,0.4); padding-bottom: 2px;
+    }
+    .card-link:hover { border-color: var(--green); }
 
-    /* SKILLS */
+    /* PRODUCT STORY (expandable) */
+    details.story { margin-top: 24px; border-top: 1px solid var(--border); padding-top: 4px; }
+    details.story summary {
+      cursor: pointer; list-style: none;
+      font-size: 14px; font-weight: 500; color: var(--white);
+      padding: 14px 0; display: flex; align-items: center; gap: 10px;
+    }
+    details.story summary::-webkit-details-marker { display: none; }
+    details.story summary::before {
+      content: '+'; color: var(--green); font-size: 20px; line-height: 1; width: 14px;
+    }
+    details.story[open] summary::before { content: '−'; }
+    details.story summary:hover { color: var(--green); }
+    .story-grid { display: grid; gap: 0; margin-bottom: 8px; }
+    .story-row {
+      display: grid; grid-template-columns: 170px 1fr; gap: 24px;
+      padding: 14px 0; border-top: 1px solid var(--border);
+    }
+    .story-row dt { font-size: 13px; color: var(--green); font-weight: 500; }
+    .story-row dd { font-size: 14px; color: #c8c8c8; line-height: 1.7; max-width: 720px; }
+    .story-row dd ul { padding-left: 18px; }
+    .story-row dd li { margin-bottom: 4px; }
+    .story-skills { font-size: 13px; color: var(--muted); padding: 14px 0 6px; border-top: 1px solid var(--border); }
+    .story-skills strong { color: var(--white); font-weight: 500; }
+
+    /* Placeholders: visible, so they cannot be published by accident */
+    .todo {
+      color: var(--amber); border: 1px dashed rgba(255,180,0,0.5);
+      padding: 1px 6px; border-radius: 3px; font-size: 13px; white-space: normal;
+    }
+
+    /* STRENGTHS */
     .skills-section { background: #0d0d0d; }
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
-    .skill-block {
-      border: 1px solid var(--border);
-      padding: 32px;
-      border-radius: 2px;
-      transition: border-color 0.3s;
+    .skill-block { border: 1px solid var(--border); padding: 28px; border-radius: 2px; }
+    .skill-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--white); }
+    .skill-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .skill-proof { font-size: 12px; color: var(--green); margin-top: 12px; }
+
+    /* EXPERIENCE */
+    .arc {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      margin-bottom: 56px; border-top: 1px solid var(--line);
     }
-    .skill-block:hover { border-color: rgba(0,201,141,0.4); }
-    .skill-icon { font-size: 28px; margin-bottom: 16px; }
-    .skill-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-    .skill-list { font-size: 13px; color: var(--muted); line-height: 1.8; }
+    .arc-step { padding: 18px 16px 0 0; position: relative; }
+    .arc-step::before {
+      content: ''; position: absolute; top: -4px; left: 0;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    }
+    .arc-year { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--green); margin-top: 6px; }
+    .arc-what { font-size: 14px; color: var(--white); margin-top: 2px; }
+    .exp-list { max-width: 860px; }
+    .exp-item { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-role { font-size: 17px; font-weight: 600; margin-bottom: 4px; color: var(--white); }
+    .exp-company { font-size: 13px; color: var(--green); margin-bottom: 8px; }
+    .exp-year { color: var(--muted); font-size: 12px; margin-left: 8px; }
+    .exp-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* BEYOND EDTECH CASE STUDIES */
+    .case-section { background: #0d0d0d; }
+    .case-card { background: var(--card-bg); border: 1px solid var(--border); padding: 36px 48px; margin-bottom: 2px; position: relative; }
+    .case-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--amber); }
+    .case-note { font-size: 13px; color: var(--muted); margin-top: 8px; max-width: 680px; line-height: 1.7; }
+
+    /* ABOUT */
+    .about-body { max-width: 700px; }
+    .about-body p { font-size: 17px; line-height: 1.8; color: #c8c8c8; margin-bottom: 20px; }
+
+    /* CREDENTIALS */
+    .cred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 1000px; }
+    .cred-heading { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
 
     /* CONTACT */
-    .contact-section {
-      text-align: center;
-      background: linear-gradient(to bottom, var(--black), #0d1a14);
-    }
+    .contact-section { text-align: center; background: linear-gradient(to bottom, var(--black), #0d1a14); }
+    .contact-section .section-intro { margin-left: auto; margin-right: auto; margin-bottom: 0; }
     .contact-email {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(28px, 4vw, 52px);
-      color: var(--green);
-      text-decoration: none;
-      display: block;
-      margin: 32px 0;
-      transition: opacity 0.2s;
+      font-size: clamp(24px, 4vw, 52px);
+      color: var(--green); text-decoration: none;
+      display: block; margin: 32px 0; overflow-wrap: anywhere;
     }
     .contact-email:hover { opacity: 0.7; }
     .contact-links { display: flex; justify-content: center; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
     .contact-link {
       font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--muted); text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line); padding-bottom: 4px;
       transition: color 0.2s, border-color 0.2s;
     }
     .contact-link:hover { color: var(--green); border-color: var(--green); }
 
-    /* EXPERIENCE */
-    .exp-item {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .exp-item:last-child { border-bottom: none; }
-    .exp-role { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #ffffff; }
-    .exp-company { font-size: 13px; color: var(--green); margin-bottom: 8px; }
-    .exp-year { color: #a0a0a0; font-size: 12px; margin-left: 8px; }
-    .exp-desc { font-size: 13px; color: #a0a0a0; line-height: 1.7; }
-
-    @media (max-width: 768px) {
-      #experience > div { grid-template-columns: 1fr !important; }
-    }
-
-    /* FOOTER */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 48px;
+      border-top: 1px solid var(--border); padding: 32px 48px;
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 16px;
     }
     footer p { font-size: 12px; color: var(--muted); }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* TABLET / MOBILE */
+    @media (max-width: 900px) {
+      .arc { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+      .cred-grid { grid-template-columns: 1fr; gap: 40px; }
     }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
-    }
-
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* MOBILE */
     @media (max-width: 768px) {
-      nav { padding: 20px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 0 24px 64px; }
-      section { padding: 72px 24px; }
+      nav { padding: 14px 20px; gap: 12px; }
+      .nav-links { gap: 18px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 11px; letter-spacing: 1px; }
+      .hero { padding: 100px 24px 56px; min-height: 88vh; }
+      section { padding: 64px 24px; }
       .about-strip { padding: 24px; gap: 24px; }
       .stat-divider { display: none; }
-      .project-card { padding: 28px 24px; grid-template-columns: 1fr; }
-      .project-meta { text-align: left; }
-      .project-arrow { right: 24px; }
+      .project-card, .case-card { padding: 28px 22px 28px 26px; }
+      .project-title { font-size: 26px; }
+      .story-row { grid-template-columns: 1fr; gap: 4px; }
       footer { padding: 24px; flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .arc { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+  <a class="skip-link" href="#products">Skip to products</a>
 
   <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">ABID</a>
+  <nav aria-label="Main">
+    <a href="#" class="nav-logo" aria-label="Abid — back to top">ABID</a>
     <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
+      <a href="#products">Products</a>
+      <a href="#strengths">Strengths</a>
       <a href="#experience">Experience</a>
+      <a href="#case-studies">Case studies</a>
+      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
   </nav>
 
+  <main>
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg-text">PM</div>
-    <div class="hero-tag">Product Manager · Edtech Specialist · Hyderabad, India</div>
-    <h1 class="hero-name">
-      Building products<br>for people learning<br><em>something hard.</em>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg-text" aria-hidden="true">PM</div>
+    <div class="hero-tag">Hyderabad, India</div>
+    <h1 class="hero-name" id="hero-title">
+      Product Manager.<br><em>Data, AI and digital products.</em>
     </h1>
     <p class="hero-desc">
-      6 years in a classroom teaching data. Now building the tools I always wished existed.
-      I bring domain expertise, user empathy, and product thinking — all from the same person.
+      I work where users, data and business problems meet. I take unclear problems to shipped products, and I've built and launched several of my own.
     </p>
     <div class="hero-cta">
-      <a href="#work" class="btn-primary">See My Work</a>
-      <a href="#contact" class="btn-outline">Get In Touch</a>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
+      <a href="#products" class="btn-primary">See the products</a>
+      <a href="#contact" class="btn-outline">Get in touch</a>
     </div>
   </section>
 
-  <!-- STATS -->
-  <div class="about-strip reveal">
-    <div class="stat">
-      <span class="stat-number">6+</span>
-      <span class="stat-label">Years Training</span>
+  <!-- PROOF STRIP -->
+  <div class="about-strip">
+    <div class="stat stat-now">
+      <span class="stat-number">Business Analyst</span>
+      <span class="stat-label">Cognizant · global technology client engagement</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
       <span class="stat-number">5</span>
-      <span class="stat-label">Products Built</span>
+      <span class="stat-label">products built and owned</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
       <span class="stat-number">2</span>
-      <span class="stat-label">Brands Founded</span>
+      <span class="stat-label">brands founded</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <span class="stat-number">∞</span>
-      <span class="stat-label">Students Impacted</span>
+      <span class="stat-number">6+</span>
+      <span class="stat-label">years training professionals in data</span>
     </div>
   </div>
 
-  <!-- WORK -->
-  <section id="work">
-    <div class="section-label">Selected Work</div>
-    <h2 class="section-title reveal">Products I've <em>owned.</em></h2>
+  <!-- PRODUCTS -->
+  <section id="products" aria-labelledby="products-title">
+    <div class="section-label">Selected products</div>
+    <h2 class="section-title" id="products-title">Products I've owned.</h2>
+    <p class="section-intro">Each one started with a user problem. Open the product story to see the decisions behind it.</p>
+
     <div class="projects-grid">
 
-      <!-- 01 SQLingo -->
-      <div class="project-card reveal" onclick="window.location='sqlingo-case-study.html'" style="cursor:pointer;">
-        <div>
-          <div class="project-number">01</div>
-          <div class="project-title">SQLingo</div>
-          <div class="project-desc">
-            Duolingo — but for SQL. A gamified, mobile-first learning app where users learn SQL through activities — match syntax, drag and drop, choose the right answer — with AI explaining every mistake. Built for the millions who want to learn SQL but can't afford live classes or sit through hours of video.
-          </div>
+      <!-- SQLingo -->
+      <article class="project-card">
+        <div class="card-top">
           <div class="project-tags">
-            <span class="tag green">In Progress</span>
-            <span class="tag">Edtech</span>
-            <span class="tag">Consumer App</span>
-            <span class="tag">AI</span>
+            <span class="tag green">Consumer product</span>
+            <span class="tag green">Zero-to-one</span>
+            <span class="tag">Founder project</span>
             <span class="tag">Gamification</span>
           </div>
+          <div class="project-meta">
+            <span class="project-status status-live">Live · in development</span>
+            <span class="project-role">Founder &amp; PM</span>
+          </div>
         </div>
-        <div class="project-meta">
-          <div class="project-status status-progress">In Progress</div>
-          <div class="project-role">Founder & PM</div>
+        <h3 class="project-title">SQLingo</h3>
+        <p class="project-desc">
+          A mobile-first, gamified practice app for SQL. People watch hours of tutorials but never get feedback on whether they can write the query. SQLingo gives them short activities with instant validation and a reason to come back tomorrow. Built solo, with no developer and no budget.
+        </p>
+        <div class="card-links">
+          <a class="card-link" href="sqlingo-case-study.html">Read the full case study</a>
+          <a class="card-link" href="https://sqlingo-eta.vercel.app" target="_blank" rel="noopener">Try it live</a>
         </div>
-        <div class="project-arrow">→</div>
-      </div>
+        <details class="story">
+          <summary>Product story</summary>
+          <dl class="story-grid">
+            <div class="story-row"><dt>Problem</dt><dd>Learners consume SQL content but have no practice environment and no feedback loop. Live classes cost ₹5,000–7,000, hard to justify before you know SQL is for you.</dd></div>
+            <div class="story-row"><dt>User</dt><dd>Freshers building a data analytics resume, and working professionals who want to pull their own data without waiting on a tech team.</dd></div>
+            <div class="story-row"><dt>Insight</dt><dd>The gap isn't content, it's feedback. It started with a student who had learned SQL by writing it in a notebook, with no way to check an answer.</dd></div>
+            <div class="story-row"><dt>My role</dt><dd>Founder and PM: discovery, personas, competitor analysis, scope, design system, content architecture, testing and deployment. Built with AI-assisted development.</dd></div>
+            <div class="story-row"><dt>Product decisions</dt><dd>
+              <ul>
+                <li>No free-type SQL in lessons. Structured activities give instant, unambiguous validation.</li>
+                <li>Freemium: free lessons, with AI-powered mock interviews planned as the paid tier.</li>
+                <li>Mistake-retry queue: wrong answers return until they are answered correctly.</li>
+                <li>Module tests (20 questions, 80% to pass). A reference button added after user feedback.</li>
+              </ul>
+            </dd></div>
+            <div class="story-row"><dt>What shipped</dt><dd>Three modules, 13 lessons and 105 activities, with XP, streaks and mistake retry. Separate test and production environments.</dd></div>
+            <div class="story-row"><dt>Trade-offs</dt><dd>Single-file front end with no backend. Progress saves in the browser only; login, leaderboards and cross-device sync are not built yet.</dd></div>
+            <div class="story-row"><dt>Outcome</dt><dd>Live in production. A first external user, a complete SQL beginner, tested it and three pieces of feedback were actioned. <span class="todo">[ADD METRIC: users, completion or retention, if tracked]</span></dd></div>
+          </dl>
+          <p class="story-skills"><strong>PM skills shown:</strong> discovery, MVP scoping, prioritisation, monetisation thinking, user feedback loops, QA.</p>
+        </details>
+      </article>
 
-      <!-- 02 Interactive SQL Roadmap -->
-      <div class="project-card reveal" onclick="window.open('https://abidunnisa.github.io/data-analytics-ebook/sql-roadmap.html','_blank')" style="cursor:pointer;">
-        <div>
-          <div class="project-number">02</div>
-          <div class="project-title">Interactive SQL Roadmap</div>
-          <div class="project-desc">
-            A free interactive SQL learning roadmap built as a standalone web tool — distributed via Instagram and LinkedIn to thousands of learners. Gives self-learners a clear, structured path through SQL without needing to buy a course or follow a scattered YouTube playlist.
-          </div>
+      <!-- AI Student Support Chatbot -->
+      <article class="project-card">
+        <div class="card-top">
           <div class="project-tags">
-            <span class="tag green">Live</span>
-            <span class="tag">Free Tool</span>
-            <span class="tag">SQL</span>
-            <span class="tag">Community</span>
-            <span class="tag">Dig Data</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <div class="project-status status-live">Live</div>
-          <div class="project-role">Creator & PM</div>
-        </div>
-        <div class="project-arrow">→</div>
-      </div>
-
-      <!-- 03 From Zero to Data Analyst -->
-      <div class="project-card reveal" onclick="window.open('https://abidunnisa.github.io/data-analytics-ebook','_blank')" style="cursor:pointer;">
-        <div>
-          <div class="project-number">03</div>
-          <div class="project-title">From Zero to Data Analyst</div>
-          <div class="project-desc">
-            A free interactive data analytics e-textbook hosted on GitHub Pages. Includes curated learning paths, YouTube channel recommendations, and a built-in certificate generator. Designed for self-learners who can't afford structured courses — giving them a guided path with zero cost.
-          </div>
-          <div class="project-tags">
-            <span class="tag green">Live</span>
-            <span class="tag">Free Product</span>
-            <span class="tag">Interactive</span>
-            <span class="tag">Edtech</span>
-            <span class="tag">Dig Data</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <div class="project-status status-live">Live</div>
-          <div class="project-role">Creator & PM</div>
-        </div>
-        <div class="project-arrow">→</div>
-      </div>
-
-      <!-- 04 AI Student Support Chatbot -->
-      <div class="project-card reveal">
-        <div>
-          <div class="project-number">04</div>
-          <div class="project-title">AI Student Support Chatbot</div>
-          <div class="project-desc">
-            A fine-tuned AI chatbot built to handle student queries when the tech team was unavailable — trained on historical student-teacher email exchanges. Designed with strict guardrails: helpful for navigation and concept clarification, but never giving direct answers to assignments or quizzes. Built before RAG was mainstream.
-          </div>
-          <div class="project-tags">
-            <span class="tag">AI Product</span>
-            <span class="tag">Fine-tuning</span>
-            <span class="tag">Edtech</span>
+            <span class="tag green">AI product</span>
+            <span class="tag green">Internal product</span>
             <span class="tag">Guardrails</span>
+            <span class="tag">Fine-tuning</span>
+          </div>
+          <div class="project-meta">
+            <span class="project-status status-live">Launched</span>
+            <span class="project-role">Product Owner · QA Lead</span>
           </div>
         </div>
-        <div class="project-meta">
-          <div class="project-status status-live">Launched</div>
-          <div class="project-role">Product Owner · QA Lead</div>
-        </div>
-      </div>
+        <h3 class="project-title">AI Student Support Chatbot</h3>
+        <p class="project-desc">
+          A fine-tuned AI chatbot that answered student questions when the tech team was unavailable. Trained on historical student–teacher email exchanges, with strict guardrails: it helps with navigation and concept clarification, and never gives direct answers to assignments or quizzes. Built before RAG was mainstream.
+        </p>
+        <details class="story">
+          <summary>Product story</summary>
+          <dl class="story-grid">
+            <div class="story-row"><dt>Problem</dt><dd>Student questions came in when the tech team wasn't available, and the support and operations teams couldn't answer them.</dd></div>
+            <div class="story-row"><dt>User</dt><dd>Students asking for help, and the support and operations teams who fielded those questions.</dd></div>
+            <div class="story-row"><dt>Insight</dt><dd>Past student–teacher email exchanges already held the answers to recurring questions, so they became the training data.</dd></div>
+            <div class="story-row"><dt>My role</dt><dd>Product Owner and QA lead. Built with an intern; I owned the requirements, the guardrail rules and the testing.</dd></div>
+            <div class="story-row"><dt>Product decisions</dt><dd>
+              <ul>
+                <li>Guardrail: help with navigation and concept clarification, never give direct answers to assignments or quizzes.</li>
+                <li>Fine-tune on the company's own historical exchanges instead of relying on a generic model.</li>
+              </ul>
+            </dd></div>
+            <div class="story-row"><dt>Quality and risk</dt><dd>Tested responses against the guardrail rules before launch. <span class="todo">[ADD: how you tested, e.g. question set, failure cases found, fixes made]</span></dd></div>
+            <div class="story-row"><dt>Outcome</dt><dd>Launched to support student queries. <span class="todo">[ADD METRIC: adoption, queries handled or time saved, if known]</span></dd></div>
+          </dl>
+          <p class="story-skills"><strong>PM skills shown:</strong> AI product ownership, guardrail design, QA, risk management, working with support and operations teams.</p>
+        </details>
+      </article>
 
-      <!-- 05 Coursekiya -->
-      <div class="project-card reveal" onclick="window.open('https://coursekiya.com','_blank')" style="cursor:pointer;">
-        <div>
-          <div class="project-number">05</div>
-          <div class="project-title">Coursekiya</div>
-          <div class="project-desc">
-            A paid data analytics training platform founded and run independently. Manages end-to-end student lifecycle — from acquisition to placement support. Built conversion funnels, batch structures, and curriculum from scratch with a focus on job-ready outcomes over content completion.
-          </div>
+      <!-- Coursekiya -->
+      <article class="project-card">
+        <div class="card-top">
           <div class="project-tags">
-            <span class="tag green">Live</span>
-            <span class="tag">Platform</span>
-            <span class="tag">B2C</span>
-            <span class="tag">Edtech</span>
-            <span class="tag">Founder</span>
+            <span class="tag green">Founder project</span>
+            <span class="tag green">Zero-to-one</span>
+            <span class="tag">Consumer product</span>
+            <span class="tag">Monetisation</span>
+          </div>
+          <div class="project-meta">
+            <span class="project-status status-live">Live</span>
+            <span class="project-role">Founder</span>
           </div>
         </div>
-        <div class="project-meta">
-          <div class="project-status status-live">Live</div>
-          <div class="project-role">Founder</div>
+        <h3 class="project-title">Coursekiya</h3>
+        <p class="project-desc">
+          A paid data analytics training product I founded and run independently. I own the full customer lifecycle, from acquisition to placement support, and I built the conversion funnels, batch structure and curriculum from scratch. It is positioned on job-ready outcomes, not content completion.
+        </p>
+        <div class="card-links">
+          <a class="card-link" href="https://coursekiya.com" target="_blank" rel="noopener">Visit Coursekiya</a>
         </div>
-        <div class="project-arrow">→</div>
-      </div>
+        <details class="story">
+          <summary>Product story</summary>
+          <dl class="story-grid">
+            <div class="story-row"><dt>Problem</dt><dd><span class="todo">[ADD: the learner problem Coursekiya was started to solve]</span></dd></div>
+            <div class="story-row"><dt>User</dt><dd><span class="todo">[ADD: who the customer is]</span></dd></div>
+            <div class="story-row"><dt>Positioning</dt><dd>Job-ready outcomes over content completion.</dd></div>
+            <div class="story-row"><dt>My role</dt><dd>Founder. Product, curriculum, acquisition, conversion and student lifecycle through to placement support.</dd></div>
+            <div class="story-row"><dt>What I built</dt><dd>Conversion funnels, batch structures and curriculum, all from scratch. Paid, running since 2023.</dd></div>
+            <div class="story-row"><dt>Monetisation</dt><dd>Paid training. <span class="todo">[ADD: pricing model, if you want to show it]</span></dd></div>
+            <div class="story-row"><dt>Experiments and feedback</dt><dd><span class="todo">[ADD: one thing you tested or changed because of student feedback]</span></dd></div>
+            <div class="story-row"><dt>Outcome</dt><dd><span class="todo">[ADD METRIC: students, conversion, placements, if you can share them]</span></dd></div>
+          </dl>
+          <p class="story-skills"><strong>PM skills shown:</strong> zero-to-one building, positioning, funnel and conversion thinking, monetisation, customer feedback.</p>
+        </details>
+      </article>
+
+      <!-- Interactive SQL Roadmap -->
+      <article class="project-card">
+        <div class="card-top">
+          <div class="project-tags">
+            <span class="tag green">Consumer product</span>
+            <span class="tag green">Product experiment</span>
+            <span class="tag">Founder project</span>
+          </div>
+          <div class="project-meta">
+            <span class="project-status status-live">Live</span>
+            <span class="project-role">Creator &amp; PM</span>
+          </div>
+        </div>
+        <h3 class="project-title">Interactive SQL Roadmap</h3>
+        <p class="project-desc">
+          A free interactive web tool that gives self-learners a clear, structured path through SQL, instead of a scattered YouTube playlist. Distributed through Instagram and LinkedIn to thousands of learners.
+        </p>
+        <div class="card-links">
+          <a class="card-link" href="https://abidunnisa.github.io/data-analytics-ebook/sql-roadmap.html" target="_blank" rel="noopener">Open the roadmap</a>
+        </div>
+        <details class="story">
+          <summary>Product story</summary>
+          <dl class="story-grid">
+            <div class="story-row"><dt>Problem</dt><dd>Self-learners had no clear order to learn SQL in, and no way to follow a path without buying a course.</dd></div>
+            <div class="story-row"><dt>User</dt><dd>Self-learners who can't afford structured courses.</dd></div>
+            <div class="story-row"><dt>My role</dt><dd>Creator and PM, from idea to launch and distribution.</dd></div>
+            <div class="story-row"><dt>What I built</dt><dd>A standalone interactive roadmap, free to use, shared through Instagram and LinkedIn.</dd></div>
+            <div class="story-row"><dt>Outcome</dt><dd><span class="todo">[ADD METRIC: visits, shares or saves, if you have them]</span></dd></div>
+          </dl>
+          <p class="story-skills"><strong>PM skills shown:</strong> problem framing, shipping a small product fast, distribution.</p>
+        </details>
+      </article>
+
+      <!-- From Zero to Data Analyst -->
+      <article class="project-card">
+        <div class="card-top">
+          <div class="project-tags">
+            <span class="tag green">Consumer product</span>
+            <span class="tag green">Zero-to-one</span>
+            <span class="tag">Founder project</span>
+          </div>
+          <div class="project-meta">
+            <span class="project-status status-live">Live</span>
+            <span class="project-role">Creator &amp; PM</span>
+          </div>
+        </div>
+        <h3 class="project-title">From Zero to Data Analyst</h3>
+        <p class="project-desc">
+          A free interactive e-textbook for becoming a data analyst: curated learning paths, channel recommendations and a built-in certificate generator. Hosted on GitHub Pages, at zero cost to the learner.
+        </p>
+        <div class="card-links">
+          <a class="card-link" href="https://abidunnisa.github.io/data-analytics-ebook" target="_blank" rel="noopener">Open the e-textbook</a>
+        </div>
+        <details class="story">
+          <summary>Product story</summary>
+          <dl class="story-grid">
+            <div class="story-row"><dt>Problem</dt><dd>Self-learners who can't afford structured courses need a guided path from beginner to job-ready.</dd></div>
+            <div class="story-row"><dt>My role</dt><dd>Creator and PM: scope, structure, build and launch.</dd></div>
+            <div class="story-row"><dt>What I built</dt><dd>An interactive e-textbook with curated learning paths, YouTube channel recommendations and a certificate generator.</dd></div>
+            <div class="story-row"><dt>Outcome</dt><dd><span class="todo">[ADD METRIC: readers, certificates generated, if tracked]</span></dd></div>
+          </dl>
+          <p class="story-skills"><strong>PM skills shown:</strong> scoping, content and product structure, end-to-end ownership.</p>
+        </details>
+      </article>
 
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="skills-section">
-    <div class="section-label">Capabilities</div>
-    <h2 class="section-title reveal">What I bring<br>to the <em>table.</em></h2>
+  <!-- STRENGTHS -->
+  <section id="strengths" class="skills-section" aria-labelledby="strengths-title">
+    <div class="section-label">Product strengths</div>
+    <h2 class="section-title" id="strengths-title">What I'm strongest at.</h2>
+    <p class="section-intro">Each one comes with the work that shows it.</p>
     <div class="skills-grid">
-      <div class="skill-block reveal">
-        <div class="skill-icon">🧭</div>
-        <div class="skill-title">Product Strategy</div>
-        <div class="skill-list">PRD Writing · User Journeys · Feature Scoping · Roadmapping · BDD / Gherkin</div>
+      <div class="skill-block">
+        <div class="skill-title">Product discovery</div>
+        <div class="skill-desc">Turning one conversation into a problem statement, personas and a competitor view before any design starts.</div>
+        <div class="skill-proof">SQLingo</div>
       </div>
-      <div class="skill-block reveal">
-        <div class="skill-icon">📊</div>
-        <div class="skill-title">Data & Analytics</div>
-        <div class="skill-list">SQL · Python · Power BI · Tableau · DAX · EDA · Statistics</div>
+      <div class="skill-block">
+        <div class="skill-title">PRDs and requirements</div>
+        <div class="skill-desc">PRDs, BDD/Gherkin specs and user journeys. Business and reporting requirements in my current role.</div>
+        <div class="skill-proof">Cognizant · OdinSchool</div>
       </div>
-      <div class="skill-block reveal">
-        <div class="skill-icon">🤖</div>
-        <div class="skill-title">AI Product</div>
-        <div class="skill-list">LLMs · RAG · Fine-tuning · Prompt Design · AI Guardrails · MCP</div>
+      <div class="skill-block">
+        <div class="skill-title">Scoping and prioritisation</div>
+        <div class="skill-desc">Deciding what the MVP includes and what waits: what to launch now, what to build next.</div>
+        <div class="skill-proof">SQLingo</div>
       </div>
-      <div class="skill-block reveal">
-        <div class="skill-icon">🎓</div>
-        <div class="skill-title">Domain: Edtech</div>
-        <div class="skill-list">Curriculum Design · Learner Psychology · Conversion Funnels · Student Outcomes</div>
+      <div class="skill-block">
+        <div class="skill-title">Data-informed decisions</div>
+        <div class="skill-desc">SQL, Power BI and Tableau for product and business reporting. KPI validation and data quality.</div>
+        <div class="skill-proof">OdinSchool · GreyCampus · Cognizant</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">AI product thinking</div>
+        <div class="skill-desc">LLMs, fine-tuning, prompt design and guardrails. Knowing what an AI feature should refuse to do.</div>
+        <div class="skill-proof">AI Student Support Chatbot</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">Product QA</div>
+        <div class="skill-desc">Testing as a product habit. Catching ambiguous questions and broken flows before users do.</div>
+        <div class="skill-proof">SQLingo · AI Student Support Chatbot</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">Cross-functional work</div>
+        <div class="skill-desc">Working with product, marketing, operations, support and engineering teams on shared goals.</div>
+        <div class="skill-proof">OdinSchool · Quantumics.AI · Cognizant</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-title">Zero-to-one building</div>
+        <div class="skill-desc">Taking an idea to a live product on my own, from first user conversation to deployment.</div>
+        <div class="skill-proof">SQLingo · Coursekiya</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" aria-labelledby="experience-title">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title" id="experience-title">How the work connects.</h2>
+    <p class="section-intro">Data first, then product, then the business side of data, with products of my own built alongside.</p>
+
+    <div class="arc" role="list" aria-label="Career progression">
+      <div class="arc-step" role="listitem"><div class="arc-year">2018</div><div class="arc-what">Data training</div></div>
+      <div class="arc-step" role="listitem"><div class="arc-year">2020</div><div class="arc-what">Product Lead</div></div>
+      <div class="arc-step" role="listitem"><div class="arc-year">2022</div><div class="arc-what">Product Content Strategist</div></div>
+      <div class="arc-step" role="listitem"><div class="arc-year">2023</div><div class="arc-what">Assistant Product Manager, and founding Coursekiya and Dig Data</div></div>
+      <div class="arc-step" role="listitem"><div class="arc-year">2026</div><div class="arc-what">Business Analyst</div></div>
+    </div>
+
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-role">Business Analyst</div>
+        <div class="exp-company">Cognizant Technology Solutions <span class="exp-year">2026 – Present</span></div>
+        <div class="exp-desc">Business Analyst on a large global technology client engagement. Work covers business requirements, KPI validation, reporting and dashboard requirements, and data quality, including investigating discrepancies between data sources and working with stakeholders to turn business questions into analytical requirements.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Assistant Product Manager</div>
+        <div class="exp-company">OdinSchool <span class="exp-year">Jun 2023 – Oct 2025</span></div>
+        <div class="exp-desc">Built Power BI and Tableau dashboards tracking enrollment, completion, and revenue. Wrote SQL for business reporting and collaborated with product and marketing teams on user engagement strategy.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Product Content Strategist</div>
+        <div class="exp-company">Quantumics.AI <span class="exp-year">Jul 2022 – Jun 2023</span></div>
+        <div class="exp-desc">Analyzed product usage and customer engagement. Conducted market and competitor research. Translated technical concepts into structured documentation and supported launch of AI-based tools.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Product Lead</div>
+        <div class="exp-company">GreyCampus <span class="exp-year">Nov 2020 – Jun 2022</span></div>
+        <div class="exp-desc">Evaluated learning platform data to understand student engagement and completion. Built internal dashboards and worked cross-functionally to support data-driven course design decisions.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Data Science Trainer</div>
+        <div class="exp-company">ExcelR · OdinSchool · FullStack Academy · Deloitte <span class="exp-year">2018 – Present</span></div>
+        <div class="exp-desc">6+ years training professionals and freshers in SQL, Python, Power BI, Tableau, and Machine Learning. This is where the real user research happened: live, in a classroom.</div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-role">Founder</div>
+        <div class="exp-company">Coursekiya · Dig Data <span class="exp-year">2023 – Present</span></div>
+        <div class="exp-desc">Coursekiya is a paid data analytics training product. Dig Data (@digdata_by_abid) is a free educational content brand on Instagram and YouTube.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES BEYOND EDTECH -->
+  <section id="case-studies" class="case-section" aria-labelledby="cases-title">
+    <div class="section-label">Beyond education</div>
+    <h2 class="section-title" id="cases-title">Product thinking in other domains.</h2>
+    <p class="section-intro">One case from enterprise analytics and one product concept from healthcare. Both are structures that are still being filled in.</p>
+
+    <!-- Enterprise analytics -->
+    <article class="case-card">
+      <div class="card-top">
+        <div class="project-tags">
+          <span class="tag green">Enterprise product</span>
+          <span class="tag green">Analytics product</span>
+          <span class="tag">Data quality</span>
+        </div>
+        <div class="project-meta">
+          <span class="project-status status-progress">Case study in progress</span>
+          <span class="project-role">Business Analyst</span>
+        </div>
+      </div>
+      <h3 class="project-title">Enterprise Analytics &amp; Data Quality</h3>
+      <p class="project-desc">When two reports show different numbers for the same KPI, nobody trusts either. This case covers how I work out why, and what it takes to get stakeholders to trust the metric again.</p>
+      <p class="case-note">Sanitised: no client, system or dataset names, and no confidential figures.</p>
+      <details class="story">
+        <summary>Case study structure</summary>
+        <dl class="story-grid">
+          <div class="story-row"><dt>Context</dt><dd><span class="todo">[CONTENT TO ADD]</span> Sanitised, high-level: the kind of reporting environment and the stakeholders involved.</dd></div>
+          <div class="story-row"><dt>The problem</dt><dd><span class="todo">[CONTENT TO ADD]</span> Different reporting sources showing different numbers for the same KPI.</dd></div>
+          <div class="story-row"><dt>Who was affected</dt><dd><span class="todo">[CONTENT TO ADD]</span></dd></div>
+          <div class="story-row"><dt>How I approached it</dt><dd><span class="todo">[CONTENT TO ADD]</span> KPI definition checks, business logic review, root-cause analysis.</dd></div>
+          <div class="story-row"><dt>Decisions and trade-offs</dt><dd><span class="todo">[CONTENT TO ADD]</span></dd></div>
+          <div class="story-row"><dt>What changed</dt><dd><span class="todo">[CONTENT TO ADD]</span> Without confidential metrics: what stakeholders could rely on afterwards.</dd></div>
+          <div class="story-row"><dt>What I learned</dt><dd><span class="todo">[CONTENT TO ADD]</span></dd></div>
+        </dl>
+        <p class="story-skills"><strong>PM skills shown:</strong> problem framing, requirements, stakeholder management, metric definition, root-cause analysis.</p>
+      </details>
+    </article>
+
+    <!-- Pharmacy concept -->
+    <article class="case-card">
+      <div class="card-top">
+        <div class="project-tags">
+          <span class="tag green">Product concept</span>
+          <span class="tag green">Product discovery</span>
+          <span class="tag">Healthcare</span>
+        </div>
+        <div class="project-meta">
+          <span class="project-status status-progress">Concept · not launched</span>
+          <span class="project-role">Discovery case study</span>
+        </div>
+      </div>
+      <h3 class="project-title">Pharmacy &amp; Clinic Inventory Intelligence</h3>
+      <p class="project-desc">A lightweight inventory product for pharmacies and clinics, aimed at stock visibility, medicine expiry, dead inventory and reorder decisions. This is a concept I'm using to show how I frame and scope a problem outside education. It has not been built or launched.</p>
+      <details class="story">
+        <summary>Discovery case structure</summary>
+        <dl class="story-grid">
+          <div class="story-row"><dt>Problem framing</dt><dd>
+            <ul>
+              <li>Stock visibility</li>
+              <li>Medicine expiry</li>
+              <li>Dead inventory</li>
+              <li>Reorder decisions</li>
+              <li>Fast- and slow-moving stock</li>
+              <li>Operational visibility</li>
+            </ul>
+          </dd></div>
+          <div class="story-row"><dt>Users to understand</dt><dd><span class="todo">[CONTENT TO ADD]</span> Who manages stock today, and how.</dd></div>
+          <div class="story-row"><dt>Research approach</dt><dd><span class="todo">[CONTENT TO ADD]</span> Who to talk to, and what to ask.</dd></div>
+          <div class="story-row"><dt>Prioritisation</dt><dd><span class="todo">[CONTENT TO ADD]</span> Which of the problems above to solve first, and why.</dd></div>
+          <div class="story-row"><dt>MVP definition</dt><dd><span class="todo">[CONTENT TO ADD]</span></dd></div>
+          <div class="story-row"><dt>Success metrics</dt><dd><span class="todo">[CONTENT TO ADD]</span></dd></div>
+          <div class="story-row"><dt>Roadmap</dt><dd><span class="todo">[CONTENT TO ADD]</span></dd></div>
+        </dl>
+        <p class="story-skills"><strong>PM skills shown:</strong> problem framing, discovery planning, prioritisation, MVP definition, metrics, roadmap thinking.</p>
+      </details>
+    </article>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="section-label">About</div>
+    <h2 class="section-title" id="about-title">The thread through my work.</h2>
+    <div class="about-body">
+      <p>I trained as a pharmacist, then moved into data: first teaching it, then using it in product roles. Six years of teaching SQL, Python, Power BI and Tableau was the most direct user research I could have asked for. I watched where people got stuck, what they asked three times, and what made them quit.</p>
+      <p>That is how I still work. I look for where people get stuck, work out why, and decide what to build or not build. I check my read against data, and work with whoever the problem needs, whether that is product, business, engineering or marketing. Then I ship something small and see what happens.</p>
+      <p>Most of the products I've built are in education, because that is the world I taught in. The work itself (discovery, scoping, prioritising, testing, iterating) isn't specific to it. Today I work as a Business Analyst on a large global technology engagement, on KPIs, reporting and data quality.</p>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section id="credentials" class="skills-section" aria-labelledby="cred-title">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title" id="cred-title">Education and certification.</h2>
+    <div class="cred-grid">
+      <div>
+        <p class="cred-heading">Certification</p>
+        <div class="exp-item">
+          <div class="exp-role">Post Graduate Certificate in Product Management</div>
+          <div class="exp-company">Duke Corporate Education / upGrad <span class="exp-year">2024</span></div>
+          <div class="exp-desc">Product strategy, user research, roadmapping, market analysis and PRD writing.</div>
+        </div>
+      </div>
+      <div>
+        <p class="cred-heading">Education</p>
+        <div class="exp-item">
+          <div class="exp-role">Master of Pharmacy (M.Pharm)</div>
+          <div class="exp-company">JNTUH <span class="exp-year">2014 – 2017</span></div>
+          <div class="exp-desc">Research methodology, data interpretation and structured problem solving.</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">Bachelor of Pharmacy (B.Pharm)</div>
+          <div class="exp-company">JNTUH <span class="exp-year">2010 – 2014</span></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="contact-section">
-    <div class="section-label">Let's Talk</div>
-    <h2 class="section-title reveal">Open to <em>collaborations.</em></h2>
-    <p style="color: var(--muted); font-size: 16px; max-width: 480px; margin: 0 auto; line-height: 1.7;">
-      If you're building something in edtech, AI, or learning — and you need someone who thinks in products and speaks the learner's language — let's talk.
-    </p>
-    <a href="mailto:abidunnisabegum@yahoo.com" class="contact-email reveal">
-      abidunnisabegum@yahoo.com
-    </a>
+  <section id="contact" class="contact-section" aria-labelledby="contact-title">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title" id="contact-title">Open to Product Management roles.</h2>
+    <p class="section-intro">Across data, AI, consumer and enterprise products. If the problem is unclear and the data is messy, I'd like to hear about it.</p>
+    <a href="mailto:abidunnisabegum@yahoo.com" class="contact-email">abidunnisabegum@yahoo.com</a>
     <div class="contact-links">
-      <a href="https://linkedin.com/in/abidunnisa-begum" target="_blank" class="contact-link">LinkedIn</a>
-      <a href="https://instagram.com/digdata_by_abid" target="_blank" class="contact-link">Instagram</a>
-      <a href="https://abidunnisa.github.io/data-analytics-ebook" target="_blank" class="contact-link">Dig Data</a>
-      <a href="https://coursekiya.com" target="_blank" class="contact-link">Coursekiya</a>
+      <a href="https://linkedin.com/in/abidunnisa-begum" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+      <a href="https://instagram.com/digdata_by_abid" target="_blank" rel="noopener" class="contact-link">Instagram</a>
+      <a href="https://abidunnisa.github.io/data-analytics-ebook" target="_blank" rel="noopener" class="contact-link">Dig Data</a>
+      <a href="https://coursekiya.com" target="_blank" rel="noopener" class="contact-link">Coursekiya</a>
     </div>
   </section>
+  </main>
 
-  <!-- EXPERIENCE -->
-  <section id="experience" style="background:#0a0a0a;">
-    <div class="section-label">Background</div>
-    <h2 class="section-title reveal">Where I've <em>been.</em></h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;">
-      <div>
-        <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:32px;">Experience</p>
-        <div class="exp-item reveal">
-          <div class="exp-role">Assistant Product Manager</div>
-          <div class="exp-company">OdinSchool <span class="exp-year">Jun 2023 – Oct 2025</span></div>
-          <div class="exp-desc">Built Power BI and Tableau dashboards tracking enrollment, completion, and revenue. Wrote SQL for business reporting and collaborated with product and marketing teams on user engagement strategy.</div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-role">Product Content Strategist</div>
-          <div class="exp-company">Quantumics.AI <span class="exp-year">Jul 2022 – Jun 2023</span></div>
-          <div class="exp-desc">Analyzed product usage and customer engagement. Conducted market and competitor research. Translated technical concepts into structured documentation and supported launch of AI-based tools.</div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-role">Product Lead</div>
-          <div class="exp-company">GreyCampus <span class="exp-year">Nov 2020 – Jun 2022</span></div>
-          <div class="exp-desc">Evaluated learning platform data to understand student engagement and completion. Built internal dashboards and worked cross-functionally to support data-driven course design decisions.</div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-role">Data Science Trainer</div>
-          <div class="exp-company">ExcelR · OdinSchool · FullStack Academy · Deloitte <span class="exp-year">2018 – Present</span></div>
-          <div class="exp-desc">6+ years training professionals and freshers in SQL, Python, Power BI, Tableau, and Machine Learning. This is where the real user research happened — live, in a classroom.</div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-role">Data Analyst</div>
-          <div class="exp-company">Prajay Engineers <span class="exp-year">Apr 2017 – Nov 2020</span></div>
-          <div class="exp-desc">Analyzed real estate sales and customer demographics. Built Excel and SQL reports supporting management decisions and strategic planning.</div>
-        </div>
-      </div>
-      <div>
-        <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:32px;">Education & Certifications</p>
-        <div class="exp-item reveal">
-          <div class="exp-role">Product Management Certification</div>
-          <div class="exp-company">UpGrad × Duke University <span class="exp-year">Jun 2024 – Dec 2024</span></div>
-          <div class="exp-desc">Product Strategy · User Research · Roadmapping · Market Analysis · PRD Writing</div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-role">Master of Pharmacy (M.Pharm)</div>
-          <div class="exp-company">JNTUH <span class="exp-year">2014 – 2017</span></div>
-          <div class="exp-desc">Research methodology, data interpretation, and structured problem solving — foundations that translate directly into product thinking.</div>
-        </div>
-        <div class="exp-item reveal">
-          <div class="exp-role">Bachelor of Pharmacy (B.Pharm)</div>
-          <div class="exp-company">JNTUH <span class="exp-year">2010 – 2014</span></div>
-        </div>
-        <div style="margin-top:48px;">
-          <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:32px;">Founded</p>
-          <div class="exp-item reveal">
-            <div class="exp-role">Coursekiya</div>
-            <div class="exp-company">Paid Data Analytics Training Platform <span class="exp-year">2023 – Present</span></div>
-            <div class="exp-desc">coursekiya.com</div>
-          </div>
-          <div class="exp-item reveal">
-            <div class="exp-role">Dig Data</div>
-            <div class="exp-company">Free Educational Content Brand <span class="exp-year">2023 – Present</span></div>
-            <div class="exp-desc">@digdata_by_abid · Instagram & YouTube</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer>
-    <p>© 2026 Abidunnisa Begum. Built with intention.</p>
-    <p style="color: var(--muted);">Hyderabad, India · +91 99854 62830</p>
+    <p>© 2026 Abidunnisa Begum</p>
+    <p>Hyderabad, India · +91 99854 62830</p>
   </footer>
-
-  <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top = my + 'px';
-    });
-    function animRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-      requestAnimationFrame(animRing);
-    }
-    animRing();
-    document.querySelectorAll('a, button, .project-card').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(2)';
-        ring.style.width = '56px'; ring.style.height = '56px';
-        ring.style.borderColor = 'rgba(0,201,141,0.6)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.width = '36px'; ring.style.height = '36px';
-        ring.style.borderColor = 'rgba(0,201,141,0.4)';
-      });
-    });
-
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
