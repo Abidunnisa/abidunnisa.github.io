@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sentence Lab Case Study (In progress) | Abidunnisa Begum — Product Manager</title>
+<meta name="description" content="A product management case study in progress: Sentence Lab, a communication practice app for Indian working professionals who think in one language and speak in English. Discovery, scoping, honest AI design and what is still unbuilt."/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#6B1E3A;--accent-light:#F2E4E8;--accent-dark:#4F1429;--accent-deep:#5A1830;
+  --bg:#FBF7EF;--surface:#ffffff;--border:#E6D9C8;
+  --text:#2A2320;--muted:#7A6B62;--amber:#8a5a00;--amber-bg:#fff3cd;--amber-bd:#ffc107;
+}
+html,body{background:#FBF7EF !important;color:#2A2320 !important;font-family:'Hanken Grotesk',sans-serif;line-height:1.7;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(251,247,239,0.95);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px);}
+.nav-logo{font-size:16px;font-weight:800;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color .2s;}
+.nav-back:hover{color:var(--accent);}
+
+.hero{padding:120px 24px 64px;max-width:800px;margin:0 auto;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:700;color:var(--accent-deep);letter-spacing:.5px;}
+.hero-tag.wip{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd);}
+.hero-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,7vw,72px);line-height:1.1;color:var(--text);margin-bottom:16px;letter-spacing:-1px;}
+.hero-title em{font-style:italic;color:var(--accent);}
+.hero-sub{font-size:18px;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:40px;}
+.hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
+.meta-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:4px;}
+.meta-value{font-size:14px;font-weight:700;color:var(--text);}
+.hero-divider{height:1px;background:var(--border);margin:48px 0;}
+
+.notice{max-width:752px;margin:0 auto 48px;background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:16px;padding:18px 22px;font-size:14px;color:var(--amber);line-height:1.6;}
+.notice strong{color:#6b4500;}
+.notice-wrap{padding:0 24px;}
+
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:752px;margin:0 auto 64px;}
+.stat-box{background:var(--surface);padding:24px 20px;text-align:center;}
+.stat-num{font-family:'Instrument Serif',serif;font-size:38px;color:var(--accent);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:4px;font-weight:600;}
+
+.content{max-width:800px;margin:0 auto;padding:0 24px 120px;}
+.section{margin-bottom:72px;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.section.visible{opacity:1;transform:translateY(0);}
+.section-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px;}
+.section-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:20px;line-height:1.2;}
+.section-title em{font-style:italic;color:var(--accent);}
+.body-text{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:16px;}
+.body-text strong{color:var(--text);font-weight:700;}
+
+.quote{border-left:3px solid var(--accent);padding:20px 24px;background:var(--accent-light);border-radius:0 12px 12px 0;margin:28px 0;}
+.quote-text{font-family:'Instrument Serif',serif;font-size:22px;color:var(--accent-dark);line-height:1.5;font-style:italic;}
+.quote-attr{font-size:13px;color:var(--accent-deep);margin-top:8px;font-weight:700;}
+
+.decisions{display:flex;flex-direction:column;gap:16px;margin-top:24px;}
+.decision-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:24px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;}
+.decision-num{width:36px;height:36px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--accent-deep);flex-shrink:0;}
+.decision-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.decision-body{font-size:14px;color:var(--muted);line-height:1.7;}
+.decision-body strong{color:var(--text);}
+
+.timeline{display:flex;flex-direction:column;margin-top:24px;}
+.timeline-item{display:grid;grid-template-columns:120px 1fr;gap:24px;padding-bottom:32px;position:relative;}
+.timeline-item::before{content:'';position:absolute;left:108px;top:8px;bottom:0;width:1px;background:var(--border);}
+.timeline-item:last-child::before{display:none;}
+.timeline-date{font-size:12px;font-weight:700;color:var(--accent);text-align:right;padding-top:2px;}
+.timeline-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);position:absolute;left:104px;top:6px;}
+.timeline-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.timeline-desc{font-size:14px;color:var(--muted);line-height:1.6;}
+
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.tag{background:var(--accent-light);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--accent-deep);}
+
+.stackbox{background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:28px;max-width:752px;margin:0 auto 48px;}
+.stackbox .lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px;}
+.chips{display:flex;flex-wrap:wrap;gap:12px;}
+.chip{background:#FAF4E8;border:1px solid var(--border);border-radius:10px;padding:12px 16px;}
+.chip b{display:block;font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px;}
+.chip span{font-size:12px;color:var(--muted);}
+.chip.wip{background:var(--amber-bg);border-color:var(--amber-bd);}
+.chip.wip b,.chip.wip span{color:var(--amber);}
+
+/* SCREENSHOTS */
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:28px;}
+.shot{margin:0;}
+.shot .phone{border-radius:28px;border:6px solid #2A2320;background:#2A2320;overflow:hidden;box-shadow:0 10px 30px rgba(42,35,32,.15);}
+.shot img{display:block;width:100%;height:auto;}
+.shot figcaption{font-size:13px;color:var(--muted);line-height:1.5;margin-top:12px;}
+.shot figcaption b{display:block;color:var(--text);font-size:14px;margin-bottom:2px;}
+.shotnote{font-size:13px;color:var(--muted);margin-top:18px;font-style:italic;}
+
+.learnings{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:24px;}
+.learning-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:20px;}
+.learning-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.learning-body{font-size:13px;color:var(--muted);line-height:1.6;}
+
+.next-section{background:var(--accent);border-radius:20px;padding:40px;text-align:center;margin-top:48px;}
+.next-title{font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;color:#fff;margin-bottom:8px;}
+.next-sub{font-size:15px;color:rgba(255,255,255,.82);margin-bottom:24px;}
+.next-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.next-tag{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:100px;padding:6px 16px;font-size:13px;color:#fff;font-weight:600;}
+
+.foot-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 24px;border-top:1px solid var(--border);max-width:800px;margin:0 auto;flex-wrap:wrap;gap:16px;}
+.foot-link{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color .2s;}
+.foot-link:hover{color:var(--accent);}
+
+@media(max-width:600px){
+  nav{padding:14px 16px;}
+  .hero{padding:100px 16px 48px;}
+  .notice-wrap{padding:0 16px;}
+  .stats-bar,.stackbox{margin-left:16px;margin-right:16px;}
+  .content{padding:0 16px 80px;}
+  .timeline-item{grid-template-columns:80px 1fr;gap:16px;}
+  .timeline-item::before{left:75px;}
+  .timeline-dot{left:71px;}
+  .decision-card{grid-template-columns:1fr;}
+  .shots{grid-template-columns:1fr 1fr;gap:14px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ABID</a>
+  <a href="index.html" class="nav-back">← Back to portfolio</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tags">
+    <div class="hero-tag wip">In progress</div>
+    <div class="hero-tag">Case study · Consumer product · AI-assisted</div>
+  </div>
+  <h1 class="hero-title">Sentence <em>Lab</em></h1>
+  <p class="hero-sub">A short daily workout for people who know English but find their sentences come out awkward, too long or translated from another language. Say or type what you mean, and get a clearer version to use right away. This is a live work in progress, so this page records what is built, what is not, and why.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><div class="meta-label">My Role</div><div class="meta-value">Founder &amp; Product Manager</div></div>
+    <div class="meta-item"><div class="meta-label">Timeline</div><div class="meta-value">Nov 2026 — Ongoing</div></div>
+    <div class="meta-item"><div class="meta-label">Status</div><div class="meta-value">Working prototype · not launched</div></div>
+    <div class="meta-item"><div class="meta-label">Stack</div><div class="meta-value">React · Tailwind · Claude</div></div>
+  </div>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="notice-wrap">
+  <div class="notice"><strong>Status, plainly:</strong> Sentence Lab is a working prototype. It has not launched, it has not been tested with real users yet, and it has no backend or accounts. Everything on this page describes the prototype as it stands today. I will update it as the product moves.</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-box"><div class="stat-num">6</div><div class="stat-lbl">Practice modes</div></div>
+  <div class="stat-box"><div class="stat-num">100+</div><div class="stat-lbl">Practice prompts</div></div>
+  <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Difficulty levels</div></div>
+  <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Rounds of simplifying</div></div>
+  <div class="stat-box"><div class="stat-num">0</div><div class="stat-lbl">Users tested so far</div></div>
+</div>
+
+<div class="stackbox">
+  <div class="lbl">Built with</div>
+  <div class="chips">
+    <div class="chip"><b>React + Tailwind</b><span>Mobile-first, single file.</span></div>
+    <div class="chip"><b>Claude</b><span>Writes the feedback and rewrites.</span></div>
+    <div class="chip"><b>Rule-based fallback</b><span>Clearly labelled when AI is off.</span></div>
+    <div class="chip"><b>localStorage</b><span>Progress saving. No backend yet.</span></div>
+    <div class="chip wip"><b>Next: own server</b><span>Needed before any public launch.</span></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-tag">01 — The Idea</div>
+    <h2 class="section-title">Knowing English isn't the <em>same as saying it well.</em></h2>
+    <p class="body-text">Many working professionals in India speak English every day and still pause before an email or a meeting comment. They think the sentence in their first language, then translate it word for word. The result is understandable, and slightly off: too long, too blunt, or too hesitant for the moment.</p>
+    <p class="body-text">Grammar apps and English courses don't help with that. The sentence is already grammatical. What's missing is practice choosing better words, with someone showing a clearer version straight away.</p>
+    <div class="quote">
+      <div class="quote-text">Practise turning your thoughts into clear, natural sentences.</div>
+      <div class="quote-attr">— the one-line promise on the app's welcome screen</div>
+    </div>
+    <p class="body-text"><strong>This is my product hypothesis, not yet a validated finding.</strong> Talking to the first real users is the next step.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">02 — The User</div>
+    <h2 class="section-title">Busy people, <em>not students.</em></h2>
+    <p class="body-text">The target user is an Indian working professional between 22 and 50 who already speaks English at work. They don't want a classroom. They want something that feels like a short workout: a real situation, a quick attempt, useful feedback.</p>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">The person in a hurry</div>
+          <div class="decision-body">Has something to say right now: a message to a manager, a reply to a client. Wants a better sentence in seconds, by speaking or typing. This is the "Say it better" box on the first screen.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">The person building a habit</div>
+          <div class="decision-body">Wants to get steadily better at expressing themselves. Takes a daily workout of three short activities, about ten minutes, and sees which patterns keep coming back.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">03 — What It Looks Like</div>
+    <h2 class="section-title">The prototype, <em>as it stands.</em></h2>
+    <p class="body-text">Screenshots from the current build, captured on a phone-sized screen.</p>
+    <div class="shots">
+      <figure class="shot"><div class="phone"><img src="img/sentence-lab/1-welcome.jpg" alt="Welcome screen explaining what Sentence Lab is, with a worked example"/></div><figcaption><b>1. Say what it's for</b>New users see a plain explanation and a worked example before anything else.</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/sentence-lab/2-home.jpg" alt="Home screen with a tap-to-speak Say it better box"/></div><figcaption><b>2. Home: say it now</b>A tap-to-speak box for someone on the move, with a daily workout below it.</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/sentence-lab/3-say-it-better.jpg" alt="Say it better result showing a rewritten sentence with a copy button"/></div><figcaption><b>3. A clearer version</b>The rewrite, a Copy button and a one-line note on what changed.</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/sentence-lab/4-practice.jpg" alt="Practice tab listing the six practice modes"/></div><figcaption><b>4. Six ways to practise</b>Each mode trains a different sentence-building skill.</figcaption></figure>
+      <figure class="shot"><div class="phone"><img src="img/sentence-lab/5-sample-feedback.jpg" alt="Sample coaching feedback showing what worked and what could sound more natural"/></div><figcaption><b>5. Coaching, not scores</b>What worked, what could sound more natural, and a better version to compare.</figcaption></figure>
+    </div>
+    <p class="shotnote">The screenshots were taken with the rule-based feedback engine, so the rewrites shown are its simple output. The Claude-powered version writes fuller feedback; the "Rule-based demo" label shown in the app is the app being honest about which one is running.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">04 — Key Product Decisions</div>
+    <h2 class="section-title">Every choice had <em>a reason.</em></h2>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">A communication gym, not an English class</div>
+          <div class="decision-body">No grammar lessons, no marks out of ten. Each activity starts from a real situation (disagreeing with a colleague, asking a manager for feedback) and feedback is coaching: what worked, what could sound more natural, and a rewrite to compare.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">No scores or percentages</div>
+          <div class="decision-body">A number on a sentence suggests false precision, and it makes adults feel tested. Feedback uses plain labels like "Nearly there" instead.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">3</div>
+        <div>
+          <div class="decision-title">Honest AI: label what is running</div>
+          <div class="decision-body">When Claude is available it writes the feedback. When it isn't, the app falls back to a simple rule-based engine and <strong>says so on screen</strong>. It never passes simple pattern-matching off as AI coaching, and the fallback states what it can't judge, such as meaning.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">4</div>
+        <div>
+          <div class="decision-title">Six modes, each training one skill</div>
+          <div class="decision-body">Say It Three Ways (direct, polite, diplomatic), Cut the Clutter, The Translation Trap, The Follow-Up Trap (a three-turn conversation), Same Thought New Words, and The 30-Second Rebuild (first attempt versus improved).</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">5</div>
+        <div>
+          <div class="decision-title">A daily workout of three activities</div>
+          <div class="decision-body">About ten minutes, three modes, at a chosen difficulty (Everyday, Intermediate, Advanced). A streak and a journal of past attempts bring people back and show which patterns keep recurring.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">6</div>
+        <div>
+          <div class="decision-title">Voice optional, typing always works</div>
+          <div class="decision-body">Speaking is the natural way to rehearse a sentence, but microphones fail on some browsers and networks. So voice is an extra, typing is the fallback, and the app makes no claims about pronunciation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">05 — How It's Being Built</div>
+    <h2 class="section-title">Built in rounds, <em>fixed by feedback.</em></h2>
+    <p class="body-text">The prototype was built with AI-assisted development. I wrote the product spec and decided the scope; each round below started from something I noticed or something I was told.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Round 1</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">Spec to working prototype</div>
+          <div class="timeline-desc">Defined the audience, six modes, coaching-style feedback, daily workout and visual style. First build had every feature in the spec.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Round 2</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">"Too complicated. Too many things at once."</div>
+          <div class="timeline-desc">My own reaction on seeing it. Home was cut down to the essentials, and the long coaching feedback now sits behind a "More coaching" toggle.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Round 3</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">"What is this for?"</div>
+          <div class="timeline-desc">Someone new couldn't tell what the app does, and the tagline didn't make sense. Added a welcome screen with a worked example and rewrote the headline in plain words.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Round 4</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">"Say it better" on the first screen</div>
+          <div class="timeline-desc">A product question: what if someone on the move just wants to speak and get a better sentence? That became the first thing on Home, with practice behind it.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Round 5</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-title">The rewrites weren't better enough</div>
+          <div class="timeline-desc">On testing, the AI barely changed one sentence. I'd told it to keep edits small. I changed the instructions to aim for what a confident professional would actually say, and to offer two alternatives in different tones.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">06 — Honest Limitations</div>
+    <h2 class="section-title">What it <em>can't do yet.</em></h2>
+    <div class="decisions">
+      <div class="decision-card">
+        <div class="decision-num">1</div>
+        <div>
+          <div class="decision-title">No server of its own</div>
+          <div class="decision-body">The Claude-powered feedback and the built-in microphone currently work only inside Claude's environment. Anyone outside it gets the rule-based fallback, which handles a small set of known patterns and can't judge meaning. A public launch needs my own server holding the AI key.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">2</div>
+        <div>
+          <div class="decision-title">No accounts, browser-only progress</div>
+          <div class="decision-body">Streaks and journals are saved in the browser. They don't sync across devices and are lost if the browser data is cleared.</div>
+        </div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-num">3</div>
+        <div>
+          <div class="decision-title">Not tested with real users or on real phones</div>
+          <div class="decision-body">Voice input across accents, low-end Android phones and weak networks is untested. So is the central question: do people come back? I have no usage data yet and won't claim any.</div>
+        </div>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:20px;"><strong>The PM lesson so far:</strong> a feature list isn't a product. Two of my biggest changes, simplifying Home and explaining the purpose, came from looking at the app as a stranger would, before any user had touched it.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-tag">07 — Product Skills Shown</div>
+    <h2 class="section-title">What this case <em>demonstrates.</em></h2>
+    <div class="learnings">
+      <div class="learning-card"><div class="learning-title">Problem framing</div><div class="learning-body">Turned a vague idea into a specific user, a specific moment and a hypothesis I state openly as unvalidated.</div></div>
+      <div class="learning-card"><div class="learning-title">Spec writing</div><div class="learning-body">Wrote a product spec covering modes, feedback style, difficulty, retention and constraints.</div></div>
+      <div class="learning-card"><div class="learning-title">Simplifying</div><div class="learning-body">Cut Home back after seeing it looked busy, and moved depth behind a toggle.</div></div>
+      <div class="learning-card"><div class="learning-title">AI product design</div><div class="learning-body">Chose transparent fallbacks over fake AI, and tuned instructions when rewrites were too timid.</div></div>
+      <div class="learning-card"><div class="learning-title">Prioritisation</div><div class="learning-body">Put the on-the-go use first and the practice features second.</div></div>
+      <div class="learning-card"><div class="learning-title">Launch readiness</div><div class="learning-body">Mapped what stands between a prototype and the app stores: a server, accounts, privacy policy, testing.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="next-section">
+      <div class="next-title">What's next for Sentence Lab</div>
+      <div class="next-sub">Prototype built. Making it real is the next phase.</div>
+      <div class="next-tags">
+        <span class="next-tag">✓ Six practice modes</span>
+        <span class="next-tag">✓ Daily workout</span>
+        <span class="next-tag">✓ Say it better (voice + text)</span>
+        <span class="next-tag">Own server for the AI key</span>
+        <span class="next-tag">Hosting on Vercel</span>
+        <span class="next-tag">Test with real users</span>
+        <span class="next-tag">Accounts &amp; cloud progress</span>
+        <span class="next-tag">Installable web app</span>
+        <span class="next-tag">App stores (later)</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot-nav">
+  <a href="index.html" class="foot-link">← Back to all work</a>
+  <a href="sqlingo-case-study.html" class="foot-link">Read the SQLingo case study →</a>
+</div>
+
+<script>
+const sections=document.querySelectorAll('.section');
+const observer=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*60);});},{threshold:0.1});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
